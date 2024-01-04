@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {storeLoader, libraryLoader, tokenLoader} from './utils/loaders'
 import RootLayout from './pages/Root';
 import StorePage from './pages/Store';
 import LibraryPage from './pages/Library';
@@ -10,11 +11,13 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
+        id: 'root',
+        loader: tokenLoader,
         children: [
-            { index: true, element: <StorePage /> },
+            { index: true, element: <StorePage />, loader: storeLoader },
             { path: 'login', element: <LoginPage /> },
-            {path: 'register', element: <RegisterPage />},
-            { path: 'library', element: <LibraryPage /> },
+            { path: 'register', element: <RegisterPage /> },
+            { path: 'library', element: <LibraryPage />, loader: libraryLoader },
             { path: 'profile', element: <ProfilePage /> },
         ],
     },

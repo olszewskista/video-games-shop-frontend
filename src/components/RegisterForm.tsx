@@ -39,6 +39,9 @@ export default function RegisterForm() {
         }
         console.log(resData.token);
         sessionStorage.setItem('token', resData.token);
+        const expiration = new Date()
+        expiration.setHours(expiration.getHours() + 1)
+        sessionStorage.setItem('expiration', expiration.toISOString())
         setFeedback({ success: true });
         setTimeout(() => {
             navigate('/');
