@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
 type FormValues = {
     email: string;
@@ -44,6 +45,10 @@ export default function LoginForm() {
     const formik = useFormik({
         initialValues: initialValues,
         onSubmit: handleSubmit,
+        validationSchema: Yup.object({
+            email: Yup.string().email('Enter correct email!').required('Email is required'),
+            password: Yup.string().min(6, 'Password is too short1'). required('Password is required')
+        })
     });
     return (<>
         <form
@@ -53,10 +58,12 @@ export default function LoginForm() {
             <div>
                 <label htmlFor="email" className='pr-4'>email</label>
                 <input type="email" id='email'{...formik.getFieldProps('email')} />
+                {formik.errors.email && formik.touched.email && <div>{formik.errors.email}</div>}
             </div>
             <div>
                 <label htmlFor="password" className='pr-4'>password</label>
                 <input type="password" id='password'{...formik.getFieldProps('password')} />
+                {formik.errors.password && formik.touched.password && <div>{formik.errors.password}</div>}
             </div>
             <button type="submit" className='w-fit' disabled={formik.isSubmitting}>
                 {formik.isSubmitting ? 'Submitting...' : 'Submit'}
