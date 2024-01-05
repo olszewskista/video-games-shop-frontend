@@ -24,7 +24,10 @@ const router = createBrowserRouter([
                 element: <LibraryPage />,
                 loader: libraryLoader,
             },
-            { path: 'profile', element: <ProfilePage /> },
+            {
+                path: 'profile',
+                children: [{ index: true, element: <ProfilePage /> }],
+            },
         ],
     },
 ]);
