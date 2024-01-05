@@ -21,11 +21,16 @@ type User = {
     };
     orderHistory?: string[];
     library?: string[];
-} | null
+} | null;
 
 type Actions = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' };
 
-const UserContext = createContext<User | null>(null);
+type UserContextProps  = {
+    user: User;
+    dispatch: React.Dispatch<Actions>;
+}
+
+const UserContext = createContext<UserContextProps>({ user: null, dispatch: () => {} });
 
 export const useUser = () => useContext(UserContext);
 
@@ -41,7 +46,7 @@ function reducer(state: User, action: Actions) {
 }
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-    const [user, dispatch] = useReducer<>(reducer, null);
+    const [user, dispatch] = useReducer(reducer, null);
 
     return (
         <UserContext.Provider value={{ user, dispatch }}>

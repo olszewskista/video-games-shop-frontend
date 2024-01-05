@@ -7,6 +7,7 @@ import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import GameDetailsPage from './pages/GameDetails';
+import { UserProvider } from './context/UserProvider';
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <UserProvider>
+            <RouterProvider router={router} />;
+        </UserProvider>
+    );
 }
 
 export default App;

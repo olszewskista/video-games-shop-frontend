@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
-import useFetch from '../hooks/useFetch';
-
+import { useUser } from '../context/UserProvider';
 type UserInfo = {
     username: string;
     email: string;
@@ -9,6 +8,7 @@ type UserInfo = {
 };
 
 export default function EditUser() {
+    const {user} = useUser();
     const formik = useFormik({
         initialValues: {
             username: '',
