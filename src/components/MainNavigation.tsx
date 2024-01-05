@@ -13,7 +13,7 @@ export default function MainNavigation() {
         <nav className="bg-blue-900 p-4">
             <ul className="flex gap-4">
                 <li>
-                    <NavLink to={'/'} end className={navClassFunc}>
+                    <NavLink to={'/'} className={navClassFunc}>
                         STORE
                     </NavLink>
                 </li>

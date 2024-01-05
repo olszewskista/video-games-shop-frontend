@@ -13,10 +13,10 @@ type Games = [
 export default function GamesList({ games }: { games: Games }) {
     return (
         <ul className="flex flex-wrap gap-4 mx-4 justify-center">
-            {games.map((game, ix) => {
+            {games.map((game) => {
                 return (
-                    <li key={ix} className="w-96 bg-blue-300 p-6 rounded-xl hover:bg-blue-400">
-                        <Link to={'.'}>
+                    <li key={game._id} className="w-96 bg-blue-300 p-6 rounded-xl hover:bg-blue-400">
+                        <Link to={game._id}>
                             <img
                                 src={game.image}
                                 alt={game.title}
