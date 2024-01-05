@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useRevalidator } from 'react-router-dom';
 import * as Yup from 'yup';
 
 type FormValues = {
@@ -17,6 +17,7 @@ type Feedback = {
 
 export default function RegisterForm() {
     const [feedback, setFeedback] = useState<Feedback>({});
+    const revalidator = useRevalidator()
     const navigate = useNavigate();
     async function handleSubmit(values: FormValues) {
         setFeedback({});
@@ -44,6 +45,7 @@ export default function RegisterForm() {
         sessionStorage.setItem('expiration', expiration.toISOString())
         setFeedback({ success: true });
         setTimeout(() => {
+            revalidator.revalidate()
             navigate('/');
         }, 1000);
     }

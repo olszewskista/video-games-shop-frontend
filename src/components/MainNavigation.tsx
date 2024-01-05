@@ -1,8 +1,10 @@
 import { NavLink, useRouteLoaderData } from 'react-router-dom';
 
 const navClassFunc = ({ isActive }: { isActive: boolean }) =>
-    isActive ? 'text-blue-500' : 'text-white';
+    isActive ? 'text-blue-500 text-2xl font-bold underline' : 'text-white text-2xl font-bold';
 
+
+    
 export default function MainNavigation() {
     const token = useRouteLoaderData('root')
 
@@ -12,29 +14,29 @@ export default function MainNavigation() {
             <ul className="flex gap-4">
                 <li>
                     <NavLink to={'/'} end className={navClassFunc}>
-                        Store
+                        STORE
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/library'} className={navClassFunc}>
-                        Library
+                        LIBRARY
                     </NavLink>
                 </li>
                 {isTokenValid && <li>
                     <NavLink to={'/profile'} className={navClassFunc}>
-                        Profile
+                        PROFILE
                     </NavLink>
                 </li>}
                 {!isTokenValid && (
                     <>
                         <li>
                             <NavLink to={'/login'} className={navClassFunc}>
-                                Login
+                                LOGIN
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={'/register'} className={navClassFunc}>
-                                Register
+                                REGISTER
                             </NavLink>
                         </li>
                     </>
