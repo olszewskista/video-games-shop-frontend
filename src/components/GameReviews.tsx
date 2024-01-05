@@ -10,7 +10,7 @@ type Reviews = [
         description: string;
         rating: number;
         gameId: string;
-        author: { _id: string; name: string };
+        author: { _id: string; username: string };
     }
 ];
 

@@ -4,7 +4,7 @@ import { useNavigate, useRevalidator } from 'react-router-dom';
 import * as Yup from 'yup';
 
 type FormValues = {
-    name: string;
+    username: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -27,7 +27,7 @@ export default function RegisterForm() {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                name: values.name,
+                username: values.username,
                 email: values.email,
                 password: values.password,
             }),
@@ -50,7 +50,7 @@ export default function RegisterForm() {
         }, 1000);
     }
     const initialValues: FormValues = {
-        name: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -59,7 +59,7 @@ export default function RegisterForm() {
         initialValues: initialValues,
         onSubmit: handleSubmit,
         validationSchema: Yup.object({
-            name: Yup.string()
+            username: Yup.string()
                 .min(4, 'Name too short!')
                 .required('Name is required!'),
             email: Yup.string()
@@ -81,14 +81,14 @@ export default function RegisterForm() {
             >
                 <div>
                     <label htmlFor="name" className="pr-4">
-                        Name
+                        Username
                     </label>
                     <input
                         type="text"
-                        id="name"
-                        {...formik.getFieldProps('name')}
+                        id="username"
+                        {...formik.getFieldProps('username')}
                     />
-                    {formik.errors.name && formik.touched.name && <div>{formik.errors.name}</div>}
+                    {formik.errors.username && formik.touched.username && <div>{formik.errors.username}</div>}
                 </div>
                 <div>
                     <label htmlFor="email" className="pr-4">

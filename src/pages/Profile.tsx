@@ -1,3 +1,5 @@
+import EditUserAuth from "../components/EditUserAuth";
+
 export default function ProfilePage() {
     return (
         <div className="flex">
@@ -6,7 +8,9 @@ export default function ProfilePage() {
                 <li><button>Order history</button></li>
                 <li><button>Support</button></li>
             </ul>
-            <div>Current tab</div>
+            <div>Current tab
+                <EditUserAuth/>
+            </div>
         </div>
     );
 }
