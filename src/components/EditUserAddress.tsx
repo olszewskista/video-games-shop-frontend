@@ -64,66 +64,71 @@ export default function EditUserAddress() {
         }
     }
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
-                <label htmlFor="street" className={labelClasses}>
-                    Street
-                </label>
-                <input
-                    type="text"
-                    id="street"
-                    className={inputClasses}
-                    {...formik.getFieldProps('street')}
-                />
-                {formik.touched.street && formik.errors.street && (
-                    <div>{formik.errors.street}</div>
+        <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
+            <form onSubmit={formik.handleSubmit} className='self-center bg-neutral-700/50 p-4 mt-4 rounded-xl'>
+                <div>
+                    <label htmlFor="street" className={labelClasses}>
+                        Street
+                    </label>
+                    <input
+                        type="text"
+                        id="street"
+                        className={inputClasses}
+                        {...formik.getFieldProps('street')}
+                    />
+                    {formik.touched.street && formik.errors.street && (
+                        <div>{formik.errors.street}</div>
+                    )}
+                </div>
+                <div>
+                    <label htmlFor="postCode" className={labelClasses}>
+                        Post code
+                    </label>
+                    <input
+                        type="text"
+                        id="postCode"
+                        className={inputClasses}
+                        {...formik.getFieldProps('postCode')}
+                    />
+                    {formik.touched.postCode && formik.errors.postCode && (
+                        <div>{formik.errors.postCode}</div>
+                    )}
+                </div>
+                <div>
+                    <label htmlFor="city" className={labelClasses}>
+                        City
+                    </label>
+                    <input
+                        type="text"
+                        id="city"
+                        className={inputClasses}
+                        {...formik.getFieldProps('city')}
+                    />
+                </div>
+                {formik.touched.city && formik.errors.city && (
+                    <div>{formik.errors.city}</div>
                 )}
-            </div>
-            <div>
-                <label htmlFor="postCode" className={labelClasses}>
-                    Post code
-                </label>
-                <input
-                    type="text"
-                    id="postCode"
-                    className={inputClasses}
-                    {...formik.getFieldProps('postCode')}
-                />
-                {formik.touched.postCode && formik.errors.postCode && (
-                    <div>{formik.errors.postCode}</div>
-                )}
-            </div>
-            <div>
-                <label htmlFor="city" className={labelClasses}>
-                    City
-                </label>
-                <input
-                    type="text"
-                    id="city"
-                    className={inputClasses}
-                    {...formik.getFieldProps('city')}
-                />
-            </div>
-            {formik.touched.city && formik.errors.city && (
-                <div>{formik.errors.city}</div>
-            )}
-            <div>
-                <label htmlFor="country" className={labelClasses}>
-                    Country
-                </label>
-                <input
-                    type="text"
-                    id="country"
-                    className={inputClasses}
-                    {...formik.getFieldProps('country')}
-                />
-                {formik.touched.country && formik.errors.country && (
-                    <div>{formik.errors.country}</div>
-                )}
-            </div>
-            <button type="submit" className="border-2 border-black px-6 py-2">
-                Save
-            </button>
-        </form>
+                <div>
+                    <label htmlFor="country" className={labelClasses}>
+                        Country
+                    </label>
+                    <input
+                        type="text"
+                        id="country"
+                        className={inputClasses}
+                        {...formik.getFieldProps('country')}
+                    />
+                    {formik.touched.country && formik.errors.country && (
+                        <div>{formik.errors.country}</div>
+                    )}
+                </div>
+                <button
+                    type="submit"
+                    className="border-2 border-white px-6 py-2 text-white"
+                >
+                    Save
+                </button>
+            </form>
+        </div>
     );
 }

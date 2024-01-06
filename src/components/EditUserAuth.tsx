@@ -64,67 +64,75 @@ export default function EditUserAuth() {
         }
     }
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
-                <label htmlFor="username" className={labelClasses}>
-                    Username
-                </label>
-                <input
-                    type="text"
-                    id="username"
-                    className={inputClasses}
-                    {...formik.getFieldProps('username')}
-                />
-                {formik.touched.username && formik.errors.username && (
-                    <div>{formik.errors.username}</div>
-                )}
-            </div>
-            <div>
-                <label htmlFor="email" className={labelClasses}>
-                    Email
-                </label>
-                <input
-                    type="email"
-                    id="email"
-                    className={inputClasses}
-                    {...formik.getFieldProps('email')}
-                />
-                {formik.touched.email && formik.errors.email && (
-                    <div>{formik.errors.email}</div>
-                )}
-            </div>
-            <div>
-                <label htmlFor="password" className={labelClasses}>
-                    Password
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    className={inputClasses}
-                    {...formik.getFieldProps('password')}
-                />
-            </div>
-            {formik.touched.password && formik.errors.password && (
-                <div>{formik.errors.password}</div>
-            )}
-            <div>
-                <label htmlFor="confirmPassword" className={labelClasses}>
-                    Confirm password
-                </label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    className={inputClasses}
-                    {...formik.getFieldProps('confirmPassword')}
-                />
-                {formik.touched.confirmPassword &&
-                    formik.errors.confirmPassword && (
-                        <div>{formik.errors.confirmPassword}</div>
+        <div className='bg-neutral-800 self-center p-4 mt-4 rounded-xl'>
+            <form
+                onSubmit={formik.handleSubmit}
+                className="self-center bg-neutral-700/50 p-4 mt-4 rounded-xl"
+            >
+                <div>
+                    <label htmlFor="username" className={labelClasses}>
+                        Username
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        className={inputClasses}
+                        {...formik.getFieldProps('username')}
+                    />
+                    {formik.touched.username && formik.errors.username && (
+                        <div>{formik.errors.username}</div>
                     )}
-            </div>
-            <button type="submit" className="border-2 border-black px-6 py-2">
-                Save
-            </button>
-        </form>
+                </div>
+                <div>
+                    <label htmlFor="email" className={labelClasses}>
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        className={inputClasses}
+                        {...formik.getFieldProps('email')}
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                        <div>{formik.errors.email}</div>
+                    )}
+                </div>
+                <div>
+                    <label htmlFor="password" className={labelClasses}>
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        className={inputClasses}
+                        {...formik.getFieldProps('password')}
+                    />
+                </div>
+                {formik.touched.password && formik.errors.password && (
+                    <div>{formik.errors.password}</div>
+                )}
+                <div>
+                    <label htmlFor="confirmPassword" className={labelClasses}>
+                        Confirm password
+                    </label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        className={inputClasses}
+                        {...formik.getFieldProps('confirmPassword')}
+                    />
+                    {formik.touched.confirmPassword &&
+                        formik.errors.confirmPassword && (
+                            <div>{formik.errors.confirmPassword}</div>
+                        )}
+                </div>
+                <button
+                    type="submit"
+                    className="border-2 border-white px-6 py-2 text-white"
+                >
+                    Save
+                </button>
+            </form>
+        </div>
     );
 }

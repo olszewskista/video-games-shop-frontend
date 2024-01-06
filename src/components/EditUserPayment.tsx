@@ -42,7 +42,7 @@ export default function EditUserPayment() {
             cvv: Yup.number()
                 .min(100, 'CVV must be 3 digits long')
                 .max(999, 'CVV must be 3 digits long')
-                .required('CVV is required')
+                .required('CVV is required'),
         }),
     });
 
@@ -73,81 +73,86 @@ export default function EditUserPayment() {
             console.log(error);
         }
     }
-    console.log(formik.values.cvv)
+    console.log(formik.values.cvv);
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col gap-4 p-4 bg-gradient-to-b from-blue-300 to-blue-400 rounded-xl">
-                <div>
-                    <input
-                        type="text"
-                        id="number"
-                        placeholder="Card number"
-                        className={inputClasses}
-                        {...formik.getFieldProps('number')}
-                    />
-                </div>
-                <div className="flex gap-10">
-                    <div className="flex">
-                        <div>
-                            <input
-                                type="number"
-                                id="expireMonth"
-                                placeholder="M"
-                                className={inputClasses + ' w-14'}
-                                {...formik.getFieldProps('expireMonth')}
-                            />
-                        </div>
-                        <span className="mx-1 mt-1">/</span>
-                        <div>
-                            <input
-                                type="number"
-                                id="expireYear"
-                                placeholder="Y"
-                                className={inputClasses + ' w-14'}
-                                {...formik.getFieldProps('expireYear')}
-                            />
-                        </div>
-                    </div>
+        <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
+            <form onSubmit={formik.handleSubmit} className='self-center bg-neutral-700/50 p-4 mt-4 rounded-xl'>
+                <div className="flex flex-col gap-4 px-4 py-8 bg-gradient-to-b from-blue-700 to-blue-800/50 rounded-xl">
                     <div>
                         <input
-                            type="number"
-                            id="cvv"
-                            placeholder="CVV"
-                            className={inputClasses + ' w-16'}
-                            {...formik.getFieldProps('cvv')}
+                            type="text"
+                            id="number"
+                            placeholder="Card number"
+                            className={inputClasses}
+                            {...formik.getFieldProps('number')}
                         />
                     </div>
+                    <div className="flex gap-10">
+                        <div className="flex">
+                            <div>
+                                <input
+                                    type="number"
+                                    id="expireMonth"
+                                    placeholder="M"
+                                    className={inputClasses + ' w-14'}
+                                    {...formik.getFieldProps('expireMonth')}
+                                />
+                            </div>
+                            <span className="mx-1 mt-1">/</span>
+                            <div>
+                                <input
+                                    type="number"
+                                    id="expireYear"
+                                    placeholder="Y"
+                                    className={inputClasses + ' w-14'}
+                                    {...formik.getFieldProps('expireYear')}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <input
+                                type="number"
+                                id="cvv"
+                                placeholder="CVV"
+                                className={inputClasses + ' w-16'}
+                                {...formik.getFieldProps('cvv')}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            {formik.touched.number && formik.errors.number && (
-                <div>{formik.errors.number}</div>
-            )}
-            {formik.touched.expireMonth && formik.errors.expireMonth && (
-                <div>{formik.errors.expireMonth}</div>
-            )}
-            {formik.touched.expireYear && formik.errors.expireYear && (
-                <div>{formik.errors.expireYear}</div>
-            )}
-            {formik.touched.cvv && formik.errors.cvv && (
-                <div>{formik.errors.cvv}</div>
-            )}
-            <div>
-                <label htmlFor="owner" className={labelClasses}>
-                    Card owner
-                </label>
-                <input
-                    type="text"
-                    id="owner"
-                    className={inputClasses}
-                    {...formik.getFieldProps('owner')}
-                />
-                {formik.touched.owner && formik.errors.owner && (
-                    <div>{formik.errors.owner}</div>
+                {formik.touched.number && formik.errors.number && (
+                    <div className='text-red-500/90'>{formik.errors.number}</div>
                 )}
-            </div>
-            <button type="submit" className="border-2 border-black px-6 py-2">
-                Save
-            </button>
-        </form>
+                {formik.touched.expireMonth && formik.errors.expireMonth && (
+                    <div className='text-red-500/90'>{formik.errors.expireMonth}</div>
+                )}
+                {formik.touched.expireYear && formik.errors.expireYear && (
+                    <div className='text-red-500/90'>{formik.errors.expireYear}</div>
+                )}
+                {formik.touched.cvv && formik.errors.cvv && (
+                    <div className='text-red-500/90'>{formik.errors.cvv}</div>
+                )}
+                <div>
+                    <label htmlFor="owner" className={labelClasses}>
+                        Card owner
+                    </label>
+                    <input
+                        type="text"
+                        id="owner"
+                        className={inputClasses + ' mt-4'}
+                        {...formik.getFieldProps('owner')}
+                    />
+                    {formik.touched.owner && formik.errors.owner && (
+                        <div className='text-red-500'>{formik.errors.owner}</div>
+                    )}
+                </div>
+                <button
+                    type="submit"
+                    className="border-2 border-white px-6 py-2 text-white"
+                >
+                    Save
+                </button>
+            </form>
+        </div>
     );
 }

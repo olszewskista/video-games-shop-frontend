@@ -5,7 +5,7 @@ const liClasses = 'mx-8 text-xl mb-2'
 
 export default function ProfileRootLayout() {
     return (
-        <div className="flex">
+        <div className="flex gap-4">
             <ul className="md:w-max w-1/3 bg-neutral-800 h-[90vh] rounded-br-3xl pt-8">
                 <li className={liClasses}>
                     <NavLink
@@ -42,7 +42,7 @@ export default function ProfileRootLayout() {
                     </NavLink>
                 </li>
             </ul>
-            <div className="flex-1">
+            <div className="flex-1 m-4">
                 <Outlet />
             </div>
         </div>
