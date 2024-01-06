@@ -2,8 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { storeLoader, libraryLoader, tokenLoader } from './utils/loaders';
 import RootLayout from './pages/Root';
 import StorePage from './pages/Store';
-import LibraryPage from './pages/Library';
-// import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import GameDetailsPage from './pages/GameDetails';
@@ -12,6 +10,8 @@ import ProfileRootLayout from './pages/ProfileRoot';
 import ProfileDetailsPage from './pages/ProfileDetails';
 import OrderHistoryPage from './pages/OrderHistory';
 import SupportPage from './pages/Support';
+import LibraryRootLayout from './pages/LibraryRoot';
+import LibraryPage from './pages/Library';
 
 const router = createBrowserRouter([
     {
@@ -26,8 +26,9 @@ const router = createBrowserRouter([
             { path: 'register', element: <RegisterPage /> },
             {
                 path: 'library',
-                element: <LibraryPage />,
+                element: <LibraryRootLayout />,
                 loader: libraryLoader,
+                children: [{ path: ':gameId', element: <LibraryPage /> }],
             },
             {
                 path: 'profile',

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type Method = 'get' | 'post' | 'put' | 'delete';
 
-export default function useFetch<T>(initalValue: T | null, url: string, method: Method = 'GET') {
+export default function useFetch<T>(initalValue: T | null, url: string, method: Method = 'get') {
     const [data, setData] = useState(initalValue);
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function useFetch<T>(initalValue: T | null, url: string, method: 
             setIsLoading(false);
         }
         fetchData();
-    }, []);
+    }, [method, url]);
 
     return { data, error, isLoading };
 }

@@ -14,13 +14,26 @@ export function storeLoader() {
     return token
 }
 
-export function libraryLoader() {
+export async function libraryLoader() {
     const token = getAuthToken()
     if (!token || token === 'EXPIRED') {
         return redirect('/login')
     }
 
-    return token
+    try {
+        const response = await fetch('http://localhost:3000/user/library', {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+        const resData = await response.json()
+        console.log(resData)
+        return resData
+    } catch (error) {
+        console.log(error)
+    }
+
+    return []
 }
 
 export function profileLoader() {
