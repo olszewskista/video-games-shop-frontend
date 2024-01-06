@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLoaderData } from 'react-router-dom';
+import { NavLink, Outlet, useRouteLoaderData } from 'react-router-dom';
 
 type Library = [
     {
@@ -13,12 +13,12 @@ type Library = [
 ];
 
 export default function LibraryRootLayout() {
-    const library = useLoaderData() as Library | [];
+    const library = useRouteLoaderData('library') as Library | [];
     return (
         <div className="flex gap-8">
-            <ul className="w-max h-[90vh] bg-neutral-800 pt-4 px-8 rounded-br-3xl">
+            <ul className="md:w-max w-1/4 h-[90vh] bg-neutral-800 pt-4 px-8 rounded-br-3xl">
                 {library.map((game) => (
-                    <li key={game._id}>
+                    <li key={game._id} className='mt-4 flex'>
                         <NavLink
                             to={game._id}
                             className={({ isActive }) =>
@@ -35,7 +35,7 @@ export default function LibraryRootLayout() {
                     </li>
                 ))}
             </ul>
-            <div>
+            <div className='flex-1'>
                 <Outlet />
             </div>
         </div>

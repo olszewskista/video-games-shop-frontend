@@ -11,7 +11,7 @@ import ProfileDetailsPage from './pages/ProfileDetails';
 import OrderHistoryPage from './pages/OrderHistory';
 import SupportPage from './pages/Support';
 import LibraryRootLayout from './pages/LibraryRoot';
-import LibraryPage from './pages/Library';
+import LibraryDetailsPage from './pages/LibraryDetails';
 
 const router = createBrowserRouter([
     {
@@ -27,8 +27,11 @@ const router = createBrowserRouter([
             {
                 path: 'library',
                 element: <LibraryRootLayout />,
+                id: 'library',
                 loader: libraryLoader,
-                children: [{ path: ':gameId', element: <LibraryPage /> }],
+                children: [
+                    { path: ':gameId', element: <LibraryDetailsPage /> },
+                ],
             },
             {
                 path: 'profile',
