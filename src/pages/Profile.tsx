@@ -1,4 +1,6 @@
+import EditUserAddress from "../components/EditUserAddress";
 import EditUserAuth from "../components/EditUserAuth";
+import EditUserPayment from "../components/EditUserPayment";
 
 export default function ProfilePage() {
     return (
@@ -10,6 +12,8 @@ export default function ProfilePage() {
             </ul>
             <div>Current tab
                 <EditUserAuth/>
+                <EditUserAddress />
+                <EditUserPayment />
             </div>
         </div>
     );

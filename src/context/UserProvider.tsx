@@ -15,9 +15,9 @@ type User = {
     creditCard?: {
         owner: string;
         number: string;
-        expireMonth: string;
-        expireYear: string;
-        ccv: string;
+        expireMonth: number;
+        expireYear: number;
+        cvv: number;
     };
     orderHistory?: string[];
     library?: string[];
