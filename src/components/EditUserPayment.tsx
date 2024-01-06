@@ -49,7 +49,7 @@ export default function EditUserPayment() {
     async function handleSubmit(values: UserPayment) {
         try {
             const response = await fetch(
-                'http://localhost:3000/user/update/address',
+                'http://localhost:3000/user/update/creditCard',
                 {
                     method: 'put',
                     headers: {

@@ -3,11 +3,15 @@ import { storeLoader, libraryLoader, tokenLoader } from './utils/loaders';
 import RootLayout from './pages/Root';
 import StorePage from './pages/Store';
 import LibraryPage from './pages/Library';
-import ProfilePage from './pages/Profile';
+// import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import GameDetailsPage from './pages/GameDetails';
 import { UserProvider } from './context/UserProvider';
+import ProfileRootLayout from './pages/ProfileRoot';
+import ProfileDetailsPage from './pages/ProfileDetails';
+import OrderHistoryPage from './pages/OrderHistory';
+import SupportPage from './pages/Support';
 
 const router = createBrowserRouter([
     {
@@ -27,7 +31,12 @@ const router = createBrowserRouter([
             },
             {
                 path: 'profile',
-                children: [{ index: true, element: <ProfilePage /> }],
+                element: <ProfileRootLayout />,
+                children: [
+                    { index: true, element: <ProfileDetailsPage /> },
+                    { path: 'orders', element: <OrderHistoryPage /> },
+                    { path: 'support', element: <SupportPage /> },
+                ],
             },
         ],
     },
@@ -36,7 +45,7 @@ const router = createBrowserRouter([
 function App() {
     return (
         <UserProvider>
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
         </UserProvider>
     );
 }
