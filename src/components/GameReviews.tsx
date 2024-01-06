@@ -33,7 +33,7 @@ export default function GameReviews() {
         fetchReviews();
     }, [gameId])
     return (
-        <div className="m-4 bg-blue-300 flex-1 max-w-md">
+        <div className="m-4 bg-neutral-800 flex-1 max-w-md">
             <ReviewForm/>
             <ReviewList reviews={reviews}/>
         </div>

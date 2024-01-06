@@ -48,6 +48,7 @@ export default function ReviewForm() {
                 <input
                     type="text"
                     id="title"
+                    className='rounded-md'
                     {...formik.getFieldProps('title')}
                 />
             </div>
@@ -57,11 +58,12 @@ export default function ReviewForm() {
                     id="description"
                     cols={30}
                     rows={10}
+                    className='rounded-xl'
                     {...formik.getFieldProps('description')}
                 ></textarea>
             </div>
             <div className="">
-                <div>Star rating</div>
+                <div className='text-white'>Star rating</div>
                 {[...Array(5)].map((_, index) => {
                     index += 1;
                     return (
@@ -84,7 +86,7 @@ export default function ReviewForm() {
             </div>
             <button
                 type="submit"
-                className="border-black border-2 px-6 py-2 bg-green-200"
+                className="border-black border-2 px-6 py-2 bg-green-300 rounded-xl"
             >
                 Send Review
             </button>

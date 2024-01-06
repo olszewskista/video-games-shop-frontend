@@ -15,7 +15,7 @@ export default function GamesList({ games }: { games: Games }) {
         <ul className="flex flex-wrap gap-4 mx-4 justify-center">
             {games.map((game) => {
                 return (
-                    <li key={game._id} className="w-96 bg-blue-300 p-6 rounded-xl hover:bg-blue-400">
+                    <li key={game._id} className="w-96 bg-neutral-800 p-6 rounded-xl hover:bg-blue-900">
                         <Link to={game._id}>
                             <img
                                 src={game.image}

@@ -1,14 +1,12 @@
 type Reviews =
-    | [
-          {
-              _id: string;
-              title: string;
-              description: string;
-              rating: number;
-              gameId: string;
-              author: { _id: string; username: string };
-          }
-      ]
+    | {
+          _id: string;
+          title: string;
+          description: string;
+          rating: number;
+          gameId: string;
+          author: { _id: string; username: string };
+      }[]
     | null;
 
 export default function ReviewList({ reviews }: { reviews: Reviews }) {
@@ -20,7 +18,7 @@ export default function ReviewList({ reviews }: { reviews: Reviews }) {
                     {reviews.map((review) => (
                         <li
                             key={review._id}
-                            className="bg-blue-400 rounded-xl p-4 mb-4"
+                            className="bg-neutral-700/60 rounded-xl p-4 mb-4"
                         >
                             <div className="text-center uppercase font-bold text-2xl">
                                 {review.title}

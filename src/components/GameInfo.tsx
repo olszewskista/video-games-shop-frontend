@@ -9,7 +9,7 @@ type Game =
 
 export default function GameInfo({ game }: {game: Game}) {
     return (
-        <div className="w-96 p-4 bg-blue-400 rounded-xl m-4 h-fit">
+        <div className="w-96 p-4 bg-neutral-800 rounded-xl m-4 h-fit">
             <img src={game.image} alt={game.title} />
             <h1 className="text-2xl uppercase font-bold">{game.title}</h1>
             <div className="flex justify-between">
