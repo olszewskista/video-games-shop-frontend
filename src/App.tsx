@@ -12,6 +12,7 @@ import OrderHistoryPage from './pages/OrderHistory';
 import SupportPage from './pages/Support';
 import LibraryRootLayout from './pages/LibraryRoot';
 import LibraryDetailsPage from './pages/LibraryDetails';
+import Checkout from './pages/Checkout';
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
         loader: tokenLoader,
         children: [
             { index: true, element: <StorePage />, loader: storeLoader },
-            { path: ':gameId', element: <GameDetailsPage /> },
+            { path: ':gameId', children:[
+                {index: true, element: <GameDetailsPage />},
+                {path: 'checkout', element: <Checkout />}
+            ] },
             { path: 'login', element: <LoginPage /> },
             { path: 'register', element: <RegisterPage /> },
             {
