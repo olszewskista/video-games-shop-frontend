@@ -196,21 +196,6 @@ export default function Checkout() {
                     <option value="creditCard">Credit Card</option>
                     <option value="transfer">Bank Transfer</option>
                 </select>
-                {paymentMethod === 'balance' && (
-                    <p>
-                        Your new balance:{' '}
-                        <span
-                            className={
-                                canAfford ? 'text-green-500' : 'text-red-500'
-                            }
-                        >
-                            {(
-                                (user?.balance ?? 0) - (data?.price ?? 0)
-                            ).toFixed(2)}
-                            $
-                        </span>
-                    </p>
-                )}
                 {!canAfford && paymentMethod === 'balance' && (
                     <p className="text-red-500">
                         You can not afford this game!
