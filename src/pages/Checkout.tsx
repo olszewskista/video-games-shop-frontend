@@ -63,7 +63,7 @@ export default function Checkout() {
         event.preventDefault();
         try {
             const response = await fetch(
-                'http://localhost:3000/games/' + params.gameId + '/buy',
+                'http://localhost:3000/orders/buy/' + params.gameId,
                 {
                     method: 'post',
                     headers: {
