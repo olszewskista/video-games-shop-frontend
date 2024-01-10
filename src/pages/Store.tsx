@@ -21,8 +21,7 @@ export default function StorePage() {
     }, [])
     return (
         <>
-            <div>Store</div>
-            <GamesFilterOptions />
+            <GamesFilterOptions setGames={setGames}/>
             {games && <GamesList games={games} />}
             {!games && <div>Loading games...</div>}
         </>

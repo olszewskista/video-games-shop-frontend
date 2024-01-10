@@ -7,6 +7,8 @@ type Game =
         description: string;
         price: number;
         image: string;
+        releaseDate: string;
+        views: number;
     }
 
 export default function GameInfo({ game }: {game: Game}) {
@@ -22,7 +24,9 @@ export default function GameInfo({ game }: {game: Game}) {
                 </Link>
                 <div className="text-xl font-bold">{game.price}$</div>
             </div>
+            <div>Release date: {new Date(game.releaseDate).toLocaleDateString()}</div>
             <div>{game.description}</div>
+            <div>Views: {Math.floor(game.views)}</div>
         </div>
     );
 }

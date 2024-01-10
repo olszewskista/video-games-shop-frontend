@@ -16,7 +16,7 @@ export default function MainNavigation() {
     const isTokenValid = token !== 'EXPIRED' && token !== null;
     return (
         <nav className="bg-neutral-800 p-4 flex justify-between">
-            <ul className="flex gap-4">
+            <ul className="flex gap-8">
                 <li>
                     <NavLink to={'/'} className={navClassFunc}>
                         STORE
