@@ -17,7 +17,6 @@ export default function RootLayout() {
                     },
                 })
                 const resData = await response.json();
-                console.log(resData)
                 dispatch({ type: 'LOGIN', payload: resData })
             } catch (error) {
                 console.log(error)

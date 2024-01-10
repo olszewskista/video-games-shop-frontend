@@ -1,3 +1,4 @@
+import FavoriteGames from '../components/FavoriteGames';
 import GamesFilterOptions from '../components/GamesFilterOptions';
 import GamesList from '../components/GamesList';
 import { useEffect, useState } from 'react';
@@ -14,7 +15,6 @@ export default function StorePage() {
             }
 
             const resData = await response.json()
-            console.log(resData)
             setGames(resData)
         }
         fetchGames()
@@ -22,6 +22,8 @@ export default function StorePage() {
     return (
         <>
             <GamesFilterOptions setGames={setGames}/>
+            {games && <FavoriteGames games={games}/>}
+            <h1 className='text-3xl text-white text-center mb-4 uppercase font-bold'>Shop</h1>
             {games && <GamesList games={games} />}
             {!games && <div>Loading games...</div>}
         </>

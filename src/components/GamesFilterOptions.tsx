@@ -12,17 +12,13 @@ export default function GamesFilterOptions({
             sort: '',
         },
         onSubmit: async (values) => {
-            // alert(JSON.stringify(values, null, 2));
-            console.log(values);
             const response = await fetch(
                 `http://localhost:3000/games/filter?title=${values.title}&category=${values.category}&sort=${values.sort}`
             );
             const resData = await response.json();
-            console.log(resData);
             setGames(resData);
         },
     });
-    console.log(formik.values);
     return (
         <div className="flex flex-col justify-center items-center bg-gradient-to-r from-neutral-900 to-neutral-700/80 my-8 p-8 rounded-xl gap-4">
             <h1 className="text-3xl font-bold uppercase">Apply your filters</h1>

@@ -21,9 +21,10 @@ type User = {
     };
     orderHistory?: string[];
     library?: string[];
+    favorites?: string[];
 } | null;
 
-type Actions = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' };
+type Actions = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' } | {type: 'UPDATE_FAVORITES', payload: string[]};
 
 type UserContextProps  = {
     user: User;
@@ -40,6 +41,11 @@ function reducer(state: User, action: Actions) {
             return action.payload;
         case 'LOGOUT':
             return null;
+        case 'UPDATE_FAVORITES':
+            if (state) {
+                return {...state, favorites: action.payload}
+            }
+            return state;
         default:
             return state;
     }
@@ -47,6 +53,7 @@ function reducer(state: User, action: Actions) {
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
     const [user, dispatch] = useReducer(reducer, null);
+    console.log(user)
 
     return (
         <UserContext.Provider value={{ user, dispatch }}>
