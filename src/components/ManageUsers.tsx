@@ -85,20 +85,20 @@ export default function ManageUsers() {
         }
     }
     return (
-        <>
+        <div className='flex flex-col gap-8 items-center bg-neutral-800 h-fit p-8 rounded-xl'>
             <form onSubmit={handleSetUser}>
                 <h3 className='text-white'>
                     {currUser
                         ? `You are editing: ${currUser.username}`
                         : 'Enter user email'}
                 </h3>
-                <input type="text" ref={usernameRef} className="text-black" />
-                <button className='text-white' type='submit'>Set</button>
+                <input type="text" ref={usernameRef} className="text-black mr-4" />
+                <button className='text-white bg-neutral-700 px-3 py-1 rounded' type='submit'>Set</button>
             </form>
-            {currUser && <div className="flex gap-4">
-                <button onClick={handleDeleteUser}>Delete user</button>
-                <div>
-                    <label htmlFor="">key</label>
+            {currUser && <div className="flex flex-col gap-4 items-center">
+                <button onClick={handleDeleteUser} className='bg-red-600/80 py-2 px-4 rounded w-fit'>Delete user</button>
+                <div className='flex flex-col text-center gap-2'>
+                    <label htmlFor="">Key</label>
                     <select name="key" id="key" onChange={(e) => setFieldData({value: '', key: e.target.value})}>
                         <option value="username">Username</option>
                         <option value="email">Email</option>
@@ -106,16 +106,16 @@ export default function ManageUsers() {
                         <option value="password">Password</option>
                         <option value="isAdmin">Admin Account</option>
                     </select>
-                    <label htmlFor="">value</label>
+                    <label htmlFor="">Value</label>
                     {fieldData.key === 'isAdmin' && <select name="value" id="value" onChange={(e) => setFieldData(prev => ({...prev, value: e.target.value}))}>
                         <option value="">Select value</option>
                         <option value="1">True</option>
                         <option value="0">False</option>
                     </select>}
                     {fieldData.key !== 'isAdmin' && <input type={fieldData.key === 'balance' ? 'number' : 'text'} value={fieldData.value} onChange={(e) => setFieldData(prev => ({...prev, value: e.target.value}))}/>}
-                    <button onClick={handleSetField}>Set data</button>
+                    <button onClick={handleSetField} className='py-1 px-2 bg-neutral-700 rounded'>Set data</button>
                 </div>
             </div>}
-        </>
+        </div>
     );
 }

@@ -30,32 +30,32 @@ export default function AddNewGameForm() {
         },
     });
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
+        <form onSubmit={formik.handleSubmit} className='flex flex-col gap-2 bg-neutral-800 p-8 rounded-xl'>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="title">Title</label>
                 <input type="text" {...formik.getFieldProps('title')}/>
             </div>
-            <div>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="description">Description</label>
                 <textarea id="description" cols={30} rows={2} {...formik.getFieldProps('description')}></textarea>
             </div>
-            <div>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="price">Price</label>
                 <input type="number" {...formik.getFieldProps('price')}/>
             </div>
-            <div>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="image">Image URL</label>
                 <input type="text" {...formik.getFieldProps('image')}/>
             </div>
-            <div>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="category">Category</label>
                 <input type="text" {...formik.getFieldProps('category')}/>
             </div>
-            <div>
+            <div className='flex flex-col text-center'>
                 <label htmlFor="releaseDate">Release Date</label>
                 <input type="date" {...formik.getFieldProps('releaseDate')}/>
             </div>
-            <button type="submit">Add</button>
+            <button type="submit" className='text-white bg-neutral-700 rounded'>Add</button>
         </form>
     );
 }
