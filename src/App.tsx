@@ -13,6 +13,7 @@ import SupportPage from './pages/Support';
 import LibraryRootLayout from './pages/LibraryRoot';
 import LibraryDetailsPage from './pages/LibraryDetails';
 import Checkout from './pages/Checkout';
+import AdminTools from './pages/AdminTools';
 
 const router = createBrowserRouter([
     {
@@ -22,10 +23,13 @@ const router = createBrowserRouter([
         loader: tokenLoader,
         children: [
             { index: true, element: <StorePage />, loader: storeLoader },
-            { path: ':gameId', children:[
-                {index: true, element: <GameDetailsPage />},
-                {path: 'checkout', element: <Checkout />}
-            ] },
+            {
+                path: ':gameId',
+                children: [
+                    { index: true, element: <GameDetailsPage /> },
+                    { path: 'checkout', element: <Checkout /> },
+                ],
+            },
             { path: 'login', element: <LoginPage /> },
             { path: 'register', element: <RegisterPage /> },
             {
@@ -44,6 +48,7 @@ const router = createBrowserRouter([
                     { index: true, element: <ProfileDetailsPage /> },
                     { path: 'orders', element: <OrderHistoryPage /> },
                     { path: 'support', element: <SupportPage /> },
+                    { path: 'admin', element: <AdminTools /> },
                 ],
             },
         ],
