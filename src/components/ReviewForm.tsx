@@ -1,10 +1,14 @@
 import { useFormik } from 'formik';
 import { useParams } from 'react-router-dom';
+import { Review } from './GameReviews';
 
 type FormValues = { title: string; description: string; rating: number };
 
-
-export default function ReviewForm() {
+export default function ReviewForm({
+    setReviews,
+}: {
+    setReviews: React.Dispatch<React.SetStateAction<Review[] | null>>;
+}) {
     const params = useParams();
     const formik = useFormik({
         initialValues: {
@@ -15,30 +19,34 @@ export default function ReviewForm() {
         onSubmit: handleSubmit,
     });
 
-    function handleSubmit(values: FormValues) {
-        console.log(values)
-        async function sendReview() {
-            const response = await fetch(
-                'http://localhost:3000/reviews',
-                {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-                    },
-                    body: JSON.stringify({
-                        gameId: params.gameId,
-                        title: values.title,
-                        description: values.description,
-                        rating: values.rating,
-                    }),
-                }
-            );
-            console.log(response)
-            const resData = await response.json();
-            console.log(resData);
+    async function handleSubmit(values: FormValues) {
+        try {
+            const response = await fetch('http://localhost:3000/reviews', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+                },
+                body: JSON.stringify({
+                    gameId: params.gameId,
+                    title: values.title,
+                    description: values.description,
+                    rating: values.rating,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
+            const resData: Review = await response.json();
+            setReviews((prev) => {
+                if (prev === null) return [resData];
+                return [...prev, resData];
+            });
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) alert(error.message);
         }
-        sendReview()
     }
 
     return (
@@ -48,7 +56,7 @@ export default function ReviewForm() {
                 <input
                     type="text"
                     id="title"
-                    className='rounded-md'
+                    className="rounded-md"
                     {...formik.getFieldProps('title')}
                 />
             </div>
@@ -58,12 +66,12 @@ export default function ReviewForm() {
                     id="description"
                     cols={30}
                     rows={10}
-                    className='rounded-xl'
+                    className="rounded-xl"
                     {...formik.getFieldProps('description')}
                 ></textarea>
             </div>
             <div className="">
-                <div className='text-white'>Star rating</div>
+                <div className="text-white">Star rating</div>
                 {[...Array(5)].map((_, index) => {
                     index += 1;
                     return (
@@ -71,9 +79,9 @@ export default function ReviewForm() {
                             type="button"
                             key={index}
                             className={
-                                index <= formik.values.rating
+                                (index <= formik.values.rating
                                     ? 'text-yellow-400'
-                                    : 'text-gray-400'
+                                    : 'text-gray-400') + ' hover:bg-transparent rounded'
                             }
                             onClick={() =>
                                 formik.setFieldValue('rating', index)

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import ReviewList from './ReviewList';
 import { useParams } from 'react-router-dom';
 
-type Reviews = [
+export type Review =
     {
         _id: string;
         title: string;
@@ -12,11 +12,10 @@ type Reviews = [
         gameId: string;
         author: { _id: string; username: string };
     }
-];
 
 export default function GameReviews() {
     const { gameId } = useParams();
-    const [reviews, setReviews] = useState<Reviews | null>(null); // Initialize with an empty array
+    const [reviews, setReviews] = useState<Review[] | null>(null); // Initialize with an empty array
     useEffect(() => {
         async function fetchReviews() {
             const response = await fetch('http://localhost:3000/reviews/' + gameId);
@@ -34,7 +33,7 @@ export default function GameReviews() {
     }, [gameId])
     return (
         <div className="m-4 bg-neutral-800 flex-1 max-w-md">
-            <ReviewForm/>
+            <ReviewForm setReviews={setReviews}/>
             <ReviewList reviews={reviews}/>
         </div>
     );
