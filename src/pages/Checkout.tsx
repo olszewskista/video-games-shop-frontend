@@ -39,7 +39,7 @@ export default function Checkout() {
     });
     const params = useParams();
     const navigate = useNavigate();
-    const { user } = useUser();
+    const { user, dispatch } = useUser();
     const { data } = useFetch<Game>(
         { _id: '', title: '', price: 0, description: '', image: '' },
         'http://localhost:3000/games/' + params.gameId
@@ -91,6 +91,7 @@ export default function Checkout() {
                 onClick: () => {navigate('/library')}
             });
             modalRef.current?.open();
+            dispatch({ type: 'BUY_GAME', payload: {balance: resData.balance, library: resData.library} });
         } catch (error) {
             setModalData({
                 title: 'Failed to buy game!',

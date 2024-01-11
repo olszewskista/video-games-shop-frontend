@@ -24,14 +24,21 @@ type User = {
     favorites?: string[];
 } | null;
 
-type Actions = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' } | {type: 'UPDATE_FAVORITES', payload: string[]};
+type Actions =
+    | { type: 'LOGIN'; payload: User }
+    | { type: 'LOGOUT' }
+    | { type: 'UPDATE_FAVORITES'; payload: string[] }
+    | { type: 'BUY_GAME'; payload: { balance: number; library: string[] } };
 
-type UserContextProps  = {
+type UserContextProps = {
     user: User;
     dispatch: React.Dispatch<Actions>;
-}
+};
 
-const UserContext = createContext<UserContextProps>({ user: null, dispatch: () => {} });
+const UserContext = createContext<UserContextProps>({
+    user: null,
+    dispatch: () => {},
+});
 
 export const useUser = () => useContext(UserContext);
 
@@ -43,7 +50,16 @@ function reducer(state: User, action: Actions) {
             return null;
         case 'UPDATE_FAVORITES':
             if (state) {
-                return {...state, favorites: action.payload}
+                return { ...state, favorites: action.payload };
+            }
+            return state;
+        case 'BUY_GAME':
+            if (state) {
+                return {
+                    ...state,
+                    balance: action.payload.balance,
+                    library: action.payload.library,
+                };
             }
             return state;
         default:
@@ -53,7 +69,7 @@ function reducer(state: User, action: Actions) {
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
     const [user, dispatch] = useReducer(reducer, null);
-    console.log(user)
+    console.log(user);
 
     return (
         <UserContext.Provider value={{ user, dispatch }}>
