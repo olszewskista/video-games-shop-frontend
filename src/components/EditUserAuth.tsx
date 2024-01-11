@@ -9,11 +9,10 @@ type UserAuth = {
 };
 
 const labelClasses = 'mr-4';
-const inputClasses = 'border-2 border-black px-2 py-1 mb-2 rounded';
+const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded';
 
 export default function EditUserAuth() {
     const { user, dispatch } = useUser();
-    console.log(user?.username, user?.email);
     const formik = useFormik({
         initialValues: {
             username: user?.username || '',
@@ -67,9 +66,9 @@ export default function EditUserAuth() {
         <div className='bg-neutral-800 self-center p-4 mt-4 rounded-xl'>
             <form
                 onSubmit={formik.handleSubmit}
-                className="self-center bg-neutral-700/50 p-4 mt-4 rounded-xl"
+                className="self-center p-4 rounded-xl flex flex-col"
             >
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="username" className={labelClasses}>
                         Username
                     </label>
@@ -83,7 +82,7 @@ export default function EditUserAuth() {
                         <div>{formik.errors.username}</div>
                     )}
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="email" className={labelClasses}>
                         Email
                     </label>
@@ -97,7 +96,7 @@ export default function EditUserAuth() {
                         <div>{formik.errors.email}</div>
                     )}
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="password" className={labelClasses}>
                         Password
                     </label>
@@ -111,7 +110,7 @@ export default function EditUserAuth() {
                 {formik.touched.password && formik.errors.password && (
                     <div>{formik.errors.password}</div>
                 )}
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="confirmPassword" className={labelClasses}>
                         Confirm password
                     </label>
@@ -128,7 +127,7 @@ export default function EditUserAuth() {
                 </div>
                 <button
                     type="submit"
-                    className="border-2 border-white px-6 py-2 text-white"
+                    className="px-6 py-2 text-white rounded bg-neutral-700 mt-2"
                 >
                     Save
                 </button>

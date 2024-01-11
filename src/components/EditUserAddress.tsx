@@ -9,7 +9,7 @@ type UserAddress = {
 };
 
 const labelClasses = 'mr-4';
-const inputClasses = 'border-2 border-black px-2 py-1 mb-2 rounded';
+const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded';
 
 export default function EditUserAddress() {
     const { user, dispatch } = useUser();
@@ -65,8 +65,8 @@ export default function EditUserAddress() {
     }
     return (
         <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
-            <form onSubmit={formik.handleSubmit} className='self-center bg-neutral-700/50 p-4 mt-4 rounded-xl'>
-                <div>
+            <form onSubmit={formik.handleSubmit} className='self-center p-4 rounded-xl flex flex-col'>
+                <div className='flex flex-col'>
                     <label htmlFor="street" className={labelClasses}>
                         Street
                     </label>
@@ -80,7 +80,7 @@ export default function EditUserAddress() {
                         <div>{formik.errors.street}</div>
                     )}
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="postCode" className={labelClasses}>
                         Post code
                     </label>
@@ -94,7 +94,7 @@ export default function EditUserAddress() {
                         <div>{formik.errors.postCode}</div>
                     )}
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="city" className={labelClasses}>
                         City
                     </label>
@@ -108,7 +108,7 @@ export default function EditUserAddress() {
                 {formik.touched.city && formik.errors.city && (
                     <div>{formik.errors.city}</div>
                 )}
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="country" className={labelClasses}>
                         Country
                     </label>
@@ -124,7 +124,7 @@ export default function EditUserAddress() {
                 </div>
                 <button
                     type="submit"
-                    className="border-2 border-white px-6 py-2 text-white"
+                    className="px-6 py-2 text-white bg-neutral-700 rounded mt-2"
                 >
                     Save
                 </button>

@@ -10,7 +10,7 @@ type UserPayment = {
 };
 
 const labelClasses = 'mr-4';
-const inputClasses = 'border-2 border-black px-2 py-1 mb-2 rounded';
+const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded';
 
 export default function EditUserPayment() {
     const { user, dispatch } = useUser();
@@ -73,11 +73,10 @@ export default function EditUserPayment() {
             console.log(error);
         }
     }
-    console.log(formik.values.cvv);
     return (
         <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
-            <form onSubmit={formik.handleSubmit} className='self-center bg-neutral-700/50 p-4 mt-4 rounded-xl'>
-                <div className="flex flex-col gap-4 px-4 py-8 bg-gradient-to-b from-blue-700 to-blue-800/50 rounded-xl">
+            <form onSubmit={formik.handleSubmit} className='self-center p-4 mt-4 rounded-xl flex flex-col gap-4'>
+                <div className="flex flex-col gap-4 px-4 py-8 bg-gradient-to-br from-neutral-300 to-neutral-500/50 rounded-xl">
                     <div>
                         <input
                             type="text"
@@ -132,14 +131,14 @@ export default function EditUserPayment() {
                 {formik.touched.cvv && formik.errors.cvv && (
                     <div className='text-red-500/90'>{formik.errors.cvv}</div>
                 )}
-                <div>
+                <div className='flex flex-col '>
                     <label htmlFor="owner" className={labelClasses}>
                         Card owner
                     </label>
                     <input
                         type="text"
                         id="owner"
-                        className={inputClasses + ' mt-4'}
+                        className={inputClasses}
                         {...formik.getFieldProps('owner')}
                     />
                     {formik.touched.owner && formik.errors.owner && (
@@ -148,7 +147,7 @@ export default function EditUserPayment() {
                 </div>
                 <button
                     type="submit"
-                    className="border-2 border-white px-6 py-2 text-white"
+                    className="px-6 py-2 text-white rounded bg-neutral-700"
                 >
                     Save
                 </button>
