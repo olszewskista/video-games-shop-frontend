@@ -17,7 +17,7 @@ type Feedback = {
 
 export default function RegisterForm() {
     const [feedback, setFeedback] = useState<Feedback>({});
-    const revalidator = useRevalidator()
+    const revalidator = useRevalidator();
     const navigate = useNavigate();
     async function handleSubmit(values: FormValues) {
         setFeedback({});
@@ -40,12 +40,12 @@ export default function RegisterForm() {
         }
         console.log(resData.token);
         sessionStorage.setItem('token', resData.token);
-        const expiration = new Date()
-        expiration.setHours(expiration.getHours() + 1)
-        sessionStorage.setItem('expiration', expiration.toISOString())
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 1);
+        sessionStorage.setItem('expiration', expiration.toISOString());
         setFeedback({ success: true });
         setTimeout(() => {
-            revalidator.revalidate()
+            revalidator.revalidate();
             navigate('/');
         }, 1000);
     }
@@ -74,12 +74,12 @@ export default function RegisterForm() {
         }),
     });
     return (
-        <>
+        <div className="flex flex-col h-[85vh] justify-center items-center">
             <form
                 onSubmit={formik.handleSubmit}
-                className="p-4 flex flex-col gap-4 bg-blue-400 w-fit m-auto"
+                className="p-8 flex flex-col gap-4 bg-neutral-800 rounded-lg w-full max-w-96"
             >
-                <div>
+                <div className="flex flex-col">
                     <label htmlFor="name" className="pr-4">
                         Username
                     </label>
@@ -88,9 +88,13 @@ export default function RegisterForm() {
                         id="username"
                         {...formik.getFieldProps('username')}
                     />
-                    {formik.errors.username && formik.touched.username && <div>{formik.errors.username}</div>}
+                    {formik.errors.username && formik.touched.username && (
+                        <div className="text-red-500 text-sm mt-2">
+                            {formik.errors.username}
+                        </div>
+                    )}
                 </div>
-                <div>
+                <div className="flex flex-col">
                     <label htmlFor="email" className="pr-4">
                         Email
                     </label>
@@ -99,9 +103,11 @@ export default function RegisterForm() {
                         id="email"
                         {...formik.getFieldProps('email')}
                     />
-                    {formik.errors.email && formik.touched.email && <div>{formik.errors.email}</div>}
+                    {formik.errors.email && formik.touched.email && (
+                        <div className='text-red-500 text-sm mt-2'>{formik.errors.email}</div>
+                    )}
                 </div>
-                <div>
+                <div className="flex flex-col">
                     <label htmlFor="password" className="pr-4">
                         Password
                     </label>
@@ -110,9 +116,11 @@ export default function RegisterForm() {
                         id="password"
                         {...formik.getFieldProps('password')}
                     />
-                    {formik.errors.password && formik.touched.password && <div>{formik.errors.password}</div>}
+                    {formik.errors.password && formik.touched.password && (
+                        <div className='text-red-500 text-sm mt-2'>{formik.errors.password}</div>
+                    )}
                 </div>
-                <div>
+                <div className="flex flex-col">
                     <label htmlFor="confirmPassword" className="pr-4">
                         Confirm Password
                     </label>
@@ -121,24 +129,29 @@ export default function RegisterForm() {
                         id="confirmPassword"
                         {...formik.getFieldProps('confirmPassword')}
                     />
-                    {formik.errors.confirmPassword && formik.touched.confirmPassword && <div>{formik.errors.confirmPassword}</div>}
+                    {formik.errors.confirmPassword &&
+                        formik.touched.confirmPassword && (
+                            <div className='text-red-500 text-sm mt-2'>{formik.errors.confirmPassword}</div>
+                        )}
                 </div>
                 <button
                     type="submit"
-                    className="w-fit"
+                    className="text-white bg-neutral-700 p-2 rounded hover:bg-blue-600 transition-all duration-300"
                     disabled={formik.isSubmitting}
                 >
                     {formik.isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
             </form>
             {feedback.error && (
-                <div className="text-center text-red-600">{feedback.error}</div>
+                <div className="text-center text-red-600 mt-2">
+                    {feedback.error}
+                </div>
             )}
             {feedback.success && (
-                <div className="text-center text-green-600">
+                <div className="text-center text-green-600 mt-2">
                     Register successfull!
                 </div>
             )}
-        </>
+        </div>
     );
 }
