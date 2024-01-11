@@ -5,8 +5,8 @@ import useLogout from '../hooks/useLogout';
 
 const navClassFunc = ({ isActive }: { isActive: boolean }) =>
     isActive
-        ? 'text-blue-500 text-2xl font-bold underline'
-        : 'text-white text-2xl font-bold hover:text-blue-500';
+        ? 'text-blue-500 text-base md:text-3xl font-bold underline underline-offset-8'
+        : 'text-white md:text-3xl font-bold hover:text-blue-500';
 
 export default function MainNavigation() {
     const token = useRouteLoaderData('root');
@@ -15,8 +15,11 @@ export default function MainNavigation() {
 
     const isTokenValid = token !== 'EXPIRED' && token !== null;
     return (
-        <nav className="bg-neutral-800 p-4 flex justify-between">
-            <ul className="flex gap-8">
+        <nav className="bg-neutral-800 p-4 flex justify-between md:text-">
+            <ul className="flex gap-8 items-center">
+                <li>
+                    <img src="https://storage.googleapis.com/games-store/logo2.jpg" alt="logo" className='w-14 rounded-full'/>
+                </li>
                 <li>
                     <NavLink to={'/'} className={navClassFunc}>
                         STORE
@@ -35,7 +38,7 @@ export default function MainNavigation() {
                             </NavLink>
                         </li>
                         <li>
-                            <button onClick={handleLogout} className='text-white text-2xl font-bold hover:text-blue-500'>LOGOUT</button>
+                            <button onClick={handleLogout} className='text-white text-3xl font-bold hover:text-blue-500'>LOGOUT</button>
                         </li>
                     </>
                 )}
@@ -55,12 +58,12 @@ export default function MainNavigation() {
                 )}
             </ul>
             {isTokenValid && (
-                <div className="flex gap-4">
-                    <div className="text-xl">
+                <div className="flex gap-4 items-center">
+                    <div className="text-2xl">
                         <FontAwesomeIcon icon={'user'} className="mr-2" />
                         {user?.username}
                     </div>
-                    <div className="text-xl">
+                    <div className="text-2xl">
                         <FontAwesomeIcon
                             icon={'dollar-sign'}
                             className="mr-2"
