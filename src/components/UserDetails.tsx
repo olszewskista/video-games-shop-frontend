@@ -16,7 +16,7 @@ export default function UserDetails({
                     <p>Username: {user?.username}</p>
                     <p>Email: {user?.email}</p>
                     <p>Admin Account: <span className={user?.isAdmin ? 'text-green-500' : 'text-red-500'}>{user?.isAdmin.toString()}</span></p>
-                    <button onClick={() => setActiveElement(1)} className='border-white border-2 py-2'>Edit</button>
+                    <button onClick={() => setActiveElement(1)} className='py-2 rounded bg-neutral-700'>Edit</button>
                 </div>
                 <div className="flex-1 bg-neutral-700/50 p-4 rounded-xl flex flex-col gap-2">
                     <h2 className="text-center uppercase font-bold text-xl">Address</h2>
@@ -24,7 +24,7 @@ export default function UserDetails({
                     <p className='capitalize'>City: {user?.address?.city}</p>
                     <p>Post code: {user?.address?.postCode}</p>
                     <p className='capitalize'>Country: {user?.address?.country}</p>
-                    <button onClick={() => setActiveElement(2)} className='border-white border-2 py-2'>Edit</button>
+                    <button onClick={() => setActiveElement(2)} className='py-2 rounded bg-neutral-700'>Edit</button>
                 </div>
                 <div className="flex-1 bg-neutral-700/50 p-4 rounded-xl flex flex-col gap-2">
                     <h2 className="text-center uppercase font-bold text-xl">Credit Card</h2>
@@ -33,7 +33,7 @@ export default function UserDetails({
                     <p>Expire month: {user?.creditCard?.expireMonth}</p>
                     <p>Expire year: {user?.creditCard?.expireYear}</p>
                     <p>CVV: {user?.creditCard?.cvv}</p>
-                    <button onClick={() => setActiveElement(3)} className='border-white border-2 py-2'>Edit</button>
+                    <button onClick={() => setActiveElement(3)} className='py-2 rounded bg-neutral-700'>Edit</button>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { useUser } from '../context/UserProvider';
 import useFetch from '../hooks/useFetch';
 import FeedbackModal from '../components/FeedbackModal';
+import UserDetails from '../components/UserDetails';
 
 type ModalHandles = {
     open: () => void;
@@ -143,7 +144,7 @@ export default function Checkout() {
                         name="discount"
                         id="discount"
                         placeholder="Promo Code"
-                        className="mr-2 text-black"
+                        className="mr-2 text-black bg-neutral-100"
                         value={discount.code}
                         onChange={(e) =>
                             setDiscount((prev) => ({
@@ -152,45 +153,16 @@ export default function Checkout() {
                             }))
                         }
                     />
-                    <button type="button" onClick={handleDiscount}>
+                    <button type="button" onClick={handleDiscount} className='rounded p-1 bg-neutral-700'>
                         Apply
                     </button>
                 </div>
-                <h3>Your billing inforamtion:</h3>
-                <div className="flex gap-4">
-                    <div>
-                        <p>ID: {user?._id}</p>
-                        <p>Username: {user?.username}</p>
-                        <p>Email: {user?.email}</p>
-                    </div>
-                    <div>
-                        <p>Street: {user?.address?.street}</p>
-                        <p>
-                            City: {user?.address?.postCode}{' '}
-                            {user?.address?.city}
-                        </p>
-                        <p>Country: {user?.address?.country}</p>
-                    </div>
-                    <div>
-                        <p>Card Owner: {user?.creditCard?.owner}</p>
-                        <p>Number: {user?.creditCard?.number}</p>
-                        <div className="flex justify-between">
-                            <p>
-                                Expire: {user?.creditCard?.expireMonth}/
-                                {user?.creditCard?.expireYear}
-                            </p>
-                            <p>CVV: {user?.creditCard?.cvv}</p>
-                        </div>
-                    </div>
-                </div>
-                <Link to={'/profile'}>
-                    <button className="">Edit</button>
-                </Link>
+                <UserDetails setActiveElement={() => {navigate('/profile')}}/>
                 <select
                     name="payment"
                     id="payment"
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="bg-neutral-700 p-1 rounded"
+                    className="bg-neutral-100 p-1 rounded"
                 >
                     <option value="balance">Balance</option>
                     <option value="creditCard">Credit Card</option>
