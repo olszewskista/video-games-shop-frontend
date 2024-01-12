@@ -1,3 +1,4 @@
+import FakeGamesList from '../components/FakeGamesList';
 import FavoriteGames from '../components/FavoriteGames';
 import GamesFilterOptions from '../components/GamesFilterOptions';
 import GamesList from '../components/GamesList';
@@ -22,6 +23,7 @@ export default function StorePage() {
     return (
         <>
             <GamesFilterOptions setGames={setGames}/>
+            <FakeGamesList />
             {games && <FavoriteGames games={games}/>}
             <h1 className='text-3xl text-white text-center mb-4 uppercase font-bold'>Shop</h1>
             {games && <GamesList games={games} />}

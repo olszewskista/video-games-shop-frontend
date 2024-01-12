@@ -15,7 +15,7 @@ export default function GamesList({ games }: { games: Games }) {
     async function handleAddToFavorites(id: string) {
         try {
             const response = await fetch(
-                'http://localhost:3000/user/favorites/'+ id,
+                'http://localhost:3000/user/favorites/' + id,
                 {
                     method: 'post',
                     headers: {
@@ -28,9 +28,8 @@ export default function GamesList({ games }: { games: Games }) {
                 throw new Error('Something went wrong');
             }
             const resData = await response.json();
-            dispatch({ type: 'UPDATE_FAVORITES', payload: resData })
+            dispatch({ type: 'UPDATE_FAVORITES', payload: resData });
             console.log(resData);
-
         } catch (error) {
             console.log(error);
         }
@@ -47,16 +46,28 @@ export default function GamesList({ games }: { games: Games }) {
                             <img
                                 src={game.image}
                                 alt={game.title}
-                                className="w-full mb-2"
+                                className="w-full mb-2 rounded-xl border-4 border-neutral-100/50"
                             />
-                            <div className="flex justify-between">
-                                <div className="text-xl">{game.title}</div>
-                                <div className="text-xl">{game.price}$</div>
+                            <div className="text-2xl font-bold uppercase">
+                                {game.title}
                             </div>
                         </Link>
-                        <button onClick={() => handleAddToFavorites(game._id)}>
-                            <FontAwesomeIcon className='text-xl' icon={user?.favorites?.includes(game._id) ? 'heart-circle-minus' : 'heart-circle-plus'}/>
-                        </button>
+                        <div className="flex justify-between">
+                            <div className="text-xl">{game.price}$</div>
+                            <button
+                                className="hover:bg-transparent"
+                                onClick={() => handleAddToFavorites(game._id)}
+                            >
+                                <FontAwesomeIcon
+                                    className="text-2xl hover:text-red-500"
+                                    icon={
+                                        user?.favorites?.includes(game._id)
+                                            ? 'heart-circle-minus'
+                                            : 'heart-circle-plus'
+                                    }
+                                />
+                            </button>
+                        </div>
                     </li>
                 );
             })}
