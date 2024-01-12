@@ -35,5 +35,5 @@ export default function useFetch<T>(initalValue: T | null, url: string, method: 
         fetchData();
     }, [method, url]);
 
-    return { data, error, isLoading };
+    return { data, error, isLoading, setData };
 }
