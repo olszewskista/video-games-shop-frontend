@@ -38,7 +38,7 @@ export default function MainNavigation() {
                             </NavLink>
                         </li>
                         <li>
-                            <button onClick={handleLogout} className='text-white text-3xl font-bold hover:text-blue-500'>LOGOUT</button>
+                            <button onClick={handleLogout} className='text-white text-3xl font-bold hover:bg-transparent hover:text-blue-500'>LOGOUT</button>
                         </li>
                     </>
                 )}
