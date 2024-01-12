@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import { useUser } from '../context/UserProvider';
 import * as Yup from 'yup';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 type UserAddress = {
     street: string;
     postCode: string;
@@ -56,15 +59,20 @@ export default function EditUserAddress() {
                     }),
                 }
             );
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
             const resData = await response.json();
-            console.log(resData);
             dispatch({ type: 'LOGIN', payload: resData });
+            toast.success('Address updated!')
         } catch (error) {
-            console.log(error);
+            if (error instanceof Error) toast(error.message);
+            else toast.error('Address update failed!')
         }
     }
     return (
         <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
+            <ToastContainer position='bottom-right'/>
             <form onSubmit={formik.handleSubmit} className='self-center p-4 rounded-xl flex flex-col'>
                 <div className='flex flex-col'>
                     <label htmlFor="street" className={labelClasses}>

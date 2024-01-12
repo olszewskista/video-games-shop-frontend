@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import { useUser } from '../context/UserProvider';
 import * as Yup from 'yup';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 type UserPayment = {
     owner: string;
     number: string;
@@ -66,15 +69,20 @@ export default function EditUserPayment() {
                     }),
                 }
             );
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
             const resData = await response.json();
-            console.log(resData);
             dispatch({ type: 'LOGIN', payload: resData });
+            toast.success('Payment method updated!')
         } catch (error) {
-            console.log(error);
+            if (error instanceof Error) toast(error.message);
+            else toast.error('Updating payment method failed!')
         }
     }
     return (
         <div className="bg-neutral-800 self-center p-4 mt-4 rounded-xl">
+            <ToastContainer position='bottom-right'/>
             <form onSubmit={formik.handleSubmit} className='self-center p-4 mt-4 rounded-xl flex flex-col gap-4'>
                 <div className="flex flex-col gap-4 px-4 py-8 bg-gradient-to-br from-neutral-300 to-neutral-500/50 rounded-xl">
                     <div>

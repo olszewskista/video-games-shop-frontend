@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import { useParams } from 'react-router-dom';
 import { Review } from './GameReviews';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormValues = { title: string; description: string; rating: number };
 
@@ -39,18 +41,20 @@ export default function ReviewForm({
                 throw new Error('Something went wrong');
             }
             const resData: Review = await response.json();
+            toast.success('Review sent!');
             setReviews((prev) => {
                 if (prev === null) return [resData];
                 return [...prev, resData];
             });
         } catch (error) {
-            console.log(error);
-            if (error instanceof Error) alert(error.message);
+            if (error instanceof Error) toast(error.message);
+            else toast.error('Adding review failed!');
         }
     }
-
+    
     return (
         <form onSubmit={formik.handleSubmit} className="p-4">
+            <ToastContainer position='bottom-right' theme='light'/>
             <div className="flex flex-col max-w-lg">
                 <label htmlFor="title">Title</label>
                 <input
@@ -81,7 +85,8 @@ export default function ReviewForm({
                             className={
                                 (index <= formik.values.rating
                                     ? 'text-yellow-400'
-                                    : 'text-gray-400') + ' hover:bg-transparent rounded'
+                                    : 'text-gray-400') +
+                                ' hover:bg-transparent rounded'
                             }
                             onClick={() =>
                                 formik.setFieldValue('rating', index)

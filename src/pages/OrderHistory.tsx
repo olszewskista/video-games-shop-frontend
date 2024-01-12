@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import FeedbackModal from '../components/FeedbackModal';
 import useFetch from '../hooks/useFetch';
+import { useUser } from '../context/UserProvider';
 
 type Order = {
     _id: string;
@@ -23,6 +24,7 @@ type ModalHandles = {
 };
 
 export default function OrderHistoryPage() {
+    const {dispatch} = useUser();
     const positiveModal = useRef<ModalHandles>();
     const negativeModal = useRef<ModalHandles>();
     const { data, isLoading } = useFetch(
@@ -48,9 +50,9 @@ export default function OrderHistoryPage() {
             const resData = await response.json();
             console.log(resData);
             positiveModal.current?.open();
+            dispatch({type: 'BUY_GAME', payload: {balance: resData.balance, library: resData.library}})
         } catch (error) {
             negativeModal.current?.open();
-            console.log(error);
         }
     }
     return (
@@ -60,11 +62,11 @@ export default function OrderHistoryPage() {
                 content="Your order has been refunded"
                 isPositive
                 ref={positiveModal}
-                onClick={() => window.location.reload()}
+                onClick={() => {}}
             />
             <FeedbackModal
                 title="Error"
-                content="Something went wrong"
+                content="You can not refund this game"
                 isPositive={false}
                 ref={negativeModal}
             />

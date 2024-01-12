@@ -1,4 +1,7 @@
 import { useFormik } from 'formik';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 
 export default function AddNewGameForm() {
     const formik = useFormik({
@@ -10,7 +13,7 @@ export default function AddNewGameForm() {
             category: '',
             releaseDate: `${new Date().getFullYear()}-01-01`,
         },
-        onSubmit: async (values) => {
+        onSubmit: async (values, actions) => {
             try {
                 const response = await fetch('http://localhost:3000/games/add', {
                     method: 'post',
@@ -21,16 +24,20 @@ export default function AddNewGameForm() {
                     },
                     body: JSON.stringify(values),
                 });
-                const resData = await response.json();
-                console.log(resData)
-                alert('git')
+                if (!response.ok) {
+                    throw new Error('Something went wrong');
+                }
+                actions.resetForm();
+                toast.success('Game added!');
             } catch (error) {
-                console.log(error);
+                if (error instanceof Error) toast(error.message);
+                else toast.error('Adding game failed!');
             }
         },
     });
     return (
         <form onSubmit={formik.handleSubmit} className='flex flex-col gap-2 bg-neutral-800 p-8 rounded-xl'>
+            <ToastContainer position='bottom-right' theme='light'/>
             <div className='flex flex-col text-center'>
                 <label htmlFor="title">Title</label>
                 <input type="text" {...formik.getFieldProps('title')}/>

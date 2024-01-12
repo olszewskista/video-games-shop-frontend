@@ -1,4 +1,6 @@
 import { useFormik } from 'formik';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GamesFilterOptions({
     setGames,
@@ -12,15 +14,26 @@ export default function GamesFilterOptions({
             sort: '',
         },
         onSubmit: async (values) => {
-            const response = await fetch(
-                `http://localhost:3000/games/filter?title=${values.title}&category=${values.category}&sort=${values.sort}`
-            );
-            const resData = await response.json();
-            setGames(resData);
+            try {
+                const response = await fetch(
+                    `http://localhost:3000/games/filter?title=${values.title}&category=${values.category}&sort=${values.sort}`
+                );
+
+                if (!response.ok) {
+                    throw new Error('Something went wrong');
+                }
+                const resData = await response.json();
+                setGames(resData);
+                toast.success('Filters applied!');
+            } catch (error) {
+                if (error instanceof Error) toast(error.message);
+                else toast.error('Something went wrong!');
+            }
         },
     });
     return (
         <div className="flex flex-col justify-center items-center bg-gradient-to-r from-neutral-900 to-neutral-700/80 my-8 p-8 rounded-xl gap-4">
+            <ToastContainer position="bottom-right" theme="light" autoClose={1000}/>
             <h1 className="text-3xl font-bold uppercase">Apply your filters</h1>
             <form onSubmit={formik.handleSubmit}>
                 <div className="flex items-center gap-4 mb-4">

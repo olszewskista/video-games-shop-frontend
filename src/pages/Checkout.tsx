@@ -177,7 +177,6 @@ export default function Checkout() {
                 <div className="flex gap-4">
                     <button
                         type="button"
-                        disabled={paymentMethod === 'balance' && !canAfford}
                         onClick={handleBuy}
                         className="bg-green-500 px-4 py-1 rounded text-white text-xl"
                     >
