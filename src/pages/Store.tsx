@@ -13,7 +13,7 @@ export default function StorePage() {
             <h1 className='text-3xl text-white text-center mb-4 uppercase font-bold'>Shop</h1>
             {isLoading && <FakeGamesList />}
             {data && <GamesList games={data} />}
-            {error && <div className='text-white text-center text-2xl'>Something went wrong!</div>}
+            {error && <div className='text-white text-center text-2xl'>Fetching games went wrong!</div>}
         </>
     );
 }
