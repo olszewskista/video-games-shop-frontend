@@ -62,7 +62,7 @@ export default function AddNewGameForm() {
                 <label htmlFor="releaseDate">Release Date</label>
                 <input type="date" {...formik.getFieldProps('releaseDate')}/>
             </div>
-            <button type="submit" className='text-white bg-neutral-700 rounded'>Add</button>
+            <button type="submit" className='text-white bg-neutral-700 rounded py-1'>Add</button>
         </form>
     );
 }

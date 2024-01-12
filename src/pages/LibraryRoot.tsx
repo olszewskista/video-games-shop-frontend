@@ -34,6 +34,7 @@ export default function LibraryRootLayout() {
                         </NavLink>
                     </li>
                 ))}
+                {library.length === 0 && <p>No games in library</p>}
             </ul>
             <div className='flex-1'>
                 <Outlet />
