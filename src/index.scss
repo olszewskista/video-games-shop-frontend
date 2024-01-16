@@ -8,31 +8,37 @@ body {
     font-family: sans-serif;
 }
 
-form {
-    color: black;
+:root {
+    color-scheme: dark;
 }
 
-label {
-    color: white;
-}
+// form {
+//     color: black;
+// }
 
-select {
-    color: black;
-    padding: 0.25rem;
-}
+// label {
+//     color: white;
+// }
 
-input {
-    color: black;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
-}
+// select {
+//     color: black;
+//     padding: 0.25rem;
+// }
 
-textarea {
-    color: black;
-    padding: 0.25rem;
-}
+// input {
+//     color: black;
+//     padding: 0.25rem;
+//     border-radius: 0.25rem;
+// }
 
-li, li > a, button {
+// textarea {
+//     color: black;
+//     padding: 0.25rem;
+// }
+
+li,
+li > a,
+button {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
@@ -40,5 +46,5 @@ li, li > a, button {
 
 button:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(37 99 235 / var(--tw-bg-opacity))
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
