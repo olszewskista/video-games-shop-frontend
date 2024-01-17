@@ -93,6 +93,15 @@ export default function ManageUsers() {
             else toast.error('Something went wrong!');
         }
     }
+    function exportUser() {
+        const data = JSON.stringify(currUser);
+        const blob = new Blob([data], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'user-info.json'
+        link.href = url;
+        link.click();
+    }
     return (
         <div className="flex flex-col gap-8 items-center bg-neutral-800 h-fit p-8 rounded-xl">
             <form onSubmit={handleSetUser}>
@@ -178,6 +187,7 @@ export default function ManageUsers() {
                         >
                             Set data
                         </button>
+                        <button onClick={exportUser} className="py-1 px-2 bg-neutral-700 rounded">Export data</button>
                     </div>
                     <ToastContainer position='bottom-right'/>
                 </div>

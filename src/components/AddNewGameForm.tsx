@@ -1,9 +1,22 @@
 import { useFormik } from 'formik';
+import { useState, useRef } from 'react';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 
+type Game = {
+    title: string;
+    description: string;
+    price: number;
+    image: string;
+    category: string;
+    releaseDate: Date;
+}
+
 export default function AddNewGameForm() {
+    const [file, setFile] = useState<Game | null>(null)
+    const fileRef = useRef<HTMLInputElement>(null)
+    console.log(file);
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -22,7 +35,7 @@ export default function AddNewGameForm() {
                         Authorization:
                             'Bearer ' + sessionStorage.getItem('token'),
                     },
-                    body: JSON.stringify(values),
+                    body: file ? JSON.stringify(file) : JSON.stringify(values),
                 });
                 if (!response.ok) {
                     throw new Error('Something went wrong');
@@ -35,6 +48,21 @@ export default function AddNewGameForm() {
             }
         },
     });
+    function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
+        const filereader = new FileReader();
+        if (!e.target.files) return;
+        filereader.readAsText(e.target.files[0], 'UTF-8');
+        filereader.onload = (e) => {
+            if (!e.target) return;
+            setFile(JSON.parse(e.target.result?.toString() || ''));
+        };
+        
+    }
+    function handleClear() {
+        setFile(null);
+        if (!fileRef.current) return;
+        fileRef.current.value = '';
+    }
     return (
         <form onSubmit={formik.handleSubmit} className='flex flex-col gap-2 bg-neutral-800 p-8 rounded-xl'>
             <ToastContainer position='bottom-right' theme='light'/>
@@ -63,6 +91,10 @@ export default function AddNewGameForm() {
                 <input type="date" {...formik.getFieldProps('releaseDate')}/>
             </div>
             <button type="submit" className='text-white bg-neutral-700 rounded py-1'>Add</button>
+            <div>
+                <input type="file" name="" id="" onChange={handleImport} ref={fileRef}/>
+                <button type='button' onClick={handleClear}>Clear</button>
+            </div>
         </form>
     );
 }
