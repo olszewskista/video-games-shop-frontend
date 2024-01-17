@@ -1,28 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GameInfo from '../components/GameInfo';
 import GameReviews from '../components/GameReviews';
+import useFetch from '../hooks/useFetch';
 
 export default function GameDetailsPage() {
     const params = useParams();
-    const [game, setGame] = useState(null);
-    useEffect(() => {
-        async function fetchGame() {
-            const response = await fetch(
-                'http://localhost:3000/games/' + params.gameId
-            );
-
-            if (!response.ok) {
-                console.log('error');
-                return;
-            }
-
-            const resData = await response.json();
-            console.log(resData);
-            setGame(resData);
-        }
-        fetchGame();
-    }, [params]);
+    const {data: game} = useFetch(null, 'http://localhost:3000/games/' + params.gameId);
     return (
         <>
             {!game && <div>Game info is loading</div>}
