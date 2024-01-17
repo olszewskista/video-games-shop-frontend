@@ -74,9 +74,7 @@ export default function Checkout() {
                     },
                     body: JSON.stringify({
                         payment: paymentMethod,
-                        price: (
-                            data?.price ? data.price * (1 - discount.value) : 0
-                        ).toFixed(2),
+                        code: discount.code,
                     }),
                 }
             );
