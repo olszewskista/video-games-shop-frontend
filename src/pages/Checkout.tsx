@@ -80,7 +80,7 @@ export default function Checkout() {
             );
             const resData = await response.json();
             if (!response.ok) {
-                throw new Error(resData);
+                throw new Error(resData.error);
             }
             setModalData({
                 title: 'Game bought!',
