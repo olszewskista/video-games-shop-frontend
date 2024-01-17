@@ -8,12 +8,13 @@ type Ticket = {
     title: string;
     messages: { message: string; sender: 'admin' | 'user' }[];
     _id: string;
+    status: 'open' | 'closed';
 }
 
 export default function SupportPage() {
     const { data, setData } = useFetch<Ticket[] | null>(
         null,
-        'http://localhost:3000/tickets'
+        'http://localhost:3000/tickets/user'
     );
     const [currentTicket, setCurrentTicket] = useState<number | null>(0);
     // console.log(data);

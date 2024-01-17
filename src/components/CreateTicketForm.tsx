@@ -5,6 +5,7 @@ type Ticket = {
     title: string;
     messages: { message: string; sender: 'admin' | 'user' }[];
     _id: string;
+    status: 'open' | 'closed';
 }
 
 export default function CreateTicketForm({ updateTickets } : { updateTickets: React.Dispatch<React.SetStateAction<Ticket[] | null>>}) {
