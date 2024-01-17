@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { storeLoader, libraryLoader, tokenLoader } from './utils/loaders';
+import { storeLoader, libraryLoader, tokenLoader, adminLoader } from './utils/loaders';
 import RootLayout from './pages/Root';
 import StorePage from './pages/Store';
 import LoginPage from './pages/Login';
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                     { index: true, element: <ProfileDetailsPage /> },
                     { path: 'orders', element: <OrderHistoryPage /> },
                     { path: 'support', element: <SupportPage /> },
-                    { path: 'admin', element: <AdminTools /> },
+                    { path: 'admin', element: <AdminTools />, loader: adminLoader },
                 ],
             },
         ],

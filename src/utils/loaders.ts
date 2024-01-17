@@ -44,3 +44,25 @@ export function profileLoader() {
 
     return token
 }
+
+export async function adminLoader() {
+    const token = getAuthToken()
+    if (!token || token === 'EXPIRED') {
+        return redirect('/login')
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/auth/admin', {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Unauthorized')
+        }
+    } catch (error) {
+        return redirect('..')
+    }
+
+    return token
+}

@@ -16,7 +16,14 @@ export default function GamesFilterOptions({
         onSubmit: async (values) => {
             try {
                 const response = await fetch(
-                    `http://localhost:3000/games/filter?title=${values.title}&category=${values.category}&sort=${values.sort}`
+                    `http://localhost:3000/games/filter?title=${values.title}&category=${values.category}&sort=${values.sort}`, {
+                        method: 'get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization:
+                                'Bearer ' + sessionStorage.getItem('token'),
+                        },
+                    }
                 );
 
                 if (!response.ok) {
