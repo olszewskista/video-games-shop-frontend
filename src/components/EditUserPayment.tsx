@@ -13,7 +13,7 @@ type UserPayment = {
 };
 
 const labelClasses = 'mr-4';
-const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded';
+const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded text-neutral-950';
 
 export default function EditUserPayment() {
     const { user, dispatch } = useUser();
@@ -146,7 +146,7 @@ export default function EditUserPayment() {
                     <input
                         type="text"
                         id="owner"
-                        className={inputClasses}
+                        className={'mb-2'}
                         {...formik.getFieldProps('owner')}
                     />
                     {formik.touched.owner && formik.errors.owner && (

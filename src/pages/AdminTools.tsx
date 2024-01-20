@@ -17,7 +17,7 @@ export default function AdminTools() {
     const [currentTicket, setCurrentTicket] = useState<number | null>(null);
 
     return (
-        <div className="flex flex-wrap gap-12">
+        <div className="flex flex-wrap gap-12 h-[80vh] overflow-y-auto">
             <div className='flex-1 flex basis-full justify-evenly'>
                 <div>
                     <h1 className="font-bold uppercase text-3xl text-center mb-2">

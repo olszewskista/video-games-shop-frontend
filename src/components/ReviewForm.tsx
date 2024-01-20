@@ -99,7 +99,7 @@ export default function ReviewForm({
             </div>
             <button
                 type="submit"
-                className="border-black border-2 px-6 py-2 bg-green-300 rounded-xl"
+                className="px-6 py-2 bg-green-500 rounded-xl hover:bg-green-700"
             >
                 Send Review
             </button>

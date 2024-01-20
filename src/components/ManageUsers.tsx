@@ -113,7 +113,7 @@ export default function ManageUsers() {
                 <input
                     type="text"
                     ref={usernameRef}
-                    className="text-black mr-4"
+                    className=" mr-4"
                 />
                 <button
                     className="text-white bg-neutral-700 px-3 py-1 rounded"

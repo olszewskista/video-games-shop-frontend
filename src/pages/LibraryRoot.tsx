@@ -16,7 +16,7 @@ export default function LibraryRootLayout() {
     const library = useRouteLoaderData('library') as Library | [];
     return (
         <div className="flex gap-8">
-            <ul className="md:w-max w-1/4 h-[90vh] bg-neutral-800 pt-4 px-8 rounded-br-3xl">
+            <ul className="md:w-max w-1/4 h-[85vh] bg-neutral-800 pt-4 px-8 rounded-br-3xl">
                 {library.map((game) => (
                     <li key={game._id} className='mt-4 flex'>
                         <NavLink

@@ -143,7 +143,7 @@ export default function Checkout() {
                         name="discount"
                         id="discount"
                         placeholder="Promo Code"
-                        className="mr-2 text-black bg-neutral-100"
+                        className="mr-2"
                         value={discount.code}
                         onChange={(e) =>
                             setDiscount((prev) => ({
@@ -161,7 +161,7 @@ export default function Checkout() {
                     name="payment"
                     id="payment"
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="bg-neutral-100 p-1 rounded"
+                    className="p-1 rounded"
                 >
                     <option value="balance">Balance</option>
                     <option value="creditCard">Credit Card</option>
@@ -176,7 +176,7 @@ export default function Checkout() {
                     <button
                         type="button"
                         onClick={handleBuy}
-                        className="bg-green-500 px-4 py-1 rounded text-white text-xl"
+                        className="bg-green-500 px-4 py-1 rounded text-white text-xl hover:bg-green-700"
                     >
                         {paymentMethod === 'balance'
                             ? 'Buy'
@@ -185,7 +185,7 @@ export default function Checkout() {
                             : 'Proceed to bank site'}
                     </button>
                     <Link to={'..'}>
-                        <button className="bg-red-500 px-4 py-1 rounded text-xl">
+                        <button className="bg-red-500 px-4 py-1 rounded text-xl hover:bg-red-700">
                             Cancel
                         </button>
                     </Link>

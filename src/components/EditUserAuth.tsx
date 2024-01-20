@@ -12,7 +12,7 @@ type UserAuth = {
 };
 
 const labelClasses = 'mr-4';
-const inputClasses = 'bg-neutral-100 px-2 py-1 mb-2 rounded';
+const inputClasses = 'mb-2';
 
 export default function EditUserAuth() {
     const { user, dispatch } = useUser();

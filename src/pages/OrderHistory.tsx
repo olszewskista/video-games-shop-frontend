@@ -74,7 +74,7 @@ export default function OrderHistoryPage() {
                 {isLoading && <p>Loading...</p>}
                 {data?.length === 0 && <p>No orders</p>}
                 {data && (
-                    <ul className="flex flex-col gap-4">
+                    <ul className="flex flex-col gap-4 h-[70vh] overflow-y-auto">
                         {data.map((order: Order) => (
                             <li
                                 key={order._id}

@@ -8,7 +8,7 @@ export default function ProfileRootLayout() {
     const {user} = useUser()
     return (
         <div className="flex gap-4">
-            <ul className="md:w-max w-1/4 bg-neutral-800 h-[90vh] rounded-br-3xl pt-8">
+            <ul className="md:w-max w-1/4 bg-neutral-800 h-[85vh] rounded-br-3xl pt-8">
                 <li className={liClasses}>
                     <NavLink
                         to={'/profile'}

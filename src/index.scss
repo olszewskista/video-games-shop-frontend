@@ -4,7 +4,6 @@
 
 body {
     background-color: rgb(18, 18, 18);
-    color: white;
     font-family: sans-serif;
 }
 
@@ -12,29 +11,10 @@ body {
     color-scheme: dark;
 }
 
-// form {
-//     color: black;
-// }
-
-// label {
-//     color: white;
-// }
-
-// select {
-//     color: black;
-//     padding: 0.25rem;
-// }
-
-// input {
-//     color: black;
-//     padding: 0.25rem;
-//     border-radius: 0.25rem;
-// }
-
-// textarea {
-//     color: black;
-//     padding: 0.25rem;
-// }
+input, textarea {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
 
 li,
 li > a,
