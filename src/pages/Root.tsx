@@ -1,12 +1,12 @@
 import { Outlet, useLoaderData } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import { useUser } from "../context/UserProvider";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export default function RootLayout() {
     const { dispatch } = useUser();
     const token = useLoaderData();
-    useEffect(() => {
+    useLayoutEffect(() => {
         async function fetchUser() {
             if (!token || token === 'EXPIRED') return
             try {

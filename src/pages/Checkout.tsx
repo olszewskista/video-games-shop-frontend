@@ -1,5 +1,5 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useUser } from '../context/UserProvider';
 import useFetch from '../hooks/useFetch';
 import FeedbackModal from '../components/FeedbackModal';
@@ -35,7 +35,7 @@ export default function Checkout() {
         title: '',
         content: '',
         isPositive: true,
-        onClick: () => {}
+        onClick: () => {},
     });
     const params = useParams();
     const navigate = useNavigate();
@@ -46,6 +46,10 @@ export default function Checkout() {
     );
     const modalRef = useRef<ModalHandles>();
     const canAfford = !((user?.balance ?? 0) <= (data?.price ?? 0));
+    const discountedPrice = useMemo(
+        () => data && (data.price * (1 - discount.value)).toFixed(2),
+        [data, discount.value]
+    );
     async function handleDiscount() {
         try {
             const response = await fetch(
@@ -86,18 +90,24 @@ export default function Checkout() {
                 title: 'Game bought!',
                 content: 'Your order id: ' + resData.id,
                 isPositive: true,
-                onClick: () => {navigate('/library')}
+                onClick: () => {
+                    navigate('/library');
+                },
             });
             modalRef.current?.open();
-            dispatch({ type: 'BUY_GAME', payload: {balance: resData.balance, library: resData.library} });
+            dispatch({
+                type: 'BUY_GAME',
+                payload: { balance: resData.balance, library: resData.library },
+            });
         } catch (error) {
             setModalData({
                 title: 'Failed to buy game!',
-                content: (error instanceof Error) ? error.message : 'Unknown error!',
+                content:
+                    error instanceof Error ? error.message : 'Unknown error!',
                 isPositive: false,
-                onClick: () => {}
+                onClick: () => {},
             });
-            modalRef.current?.open()
+            modalRef.current?.open();
         }
     }
     return (
@@ -131,8 +141,7 @@ export default function Checkout() {
                                 {data.price}$
                             </span>
                             <span className="text-green-500">
-                                {(data.price * (1 - discount.value)).toFixed(2)}
-                                $
+                                {discountedPrice}$
                             </span>
                         </p>
                     )}
@@ -152,11 +161,19 @@ export default function Checkout() {
                             }))
                         }
                     />
-                    <button type="button" onClick={handleDiscount} className='rounded p-1 bg-neutral-700'>
+                    <button
+                        type="button"
+                        onClick={handleDiscount}
+                        className="rounded p-1 bg-neutral-700"
+                    >
                         Apply
                     </button>
                 </div>
-                <UserDetails setActiveElement={() => {navigate('/profile')}}/>
+                <UserDetails
+                    setActiveElement={() => {
+                        navigate('/profile');
+                    }}
+                />
                 <select
                     name="payment"
                     id="payment"

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 type Ticket = {
@@ -17,7 +17,7 @@ export default function TicketDetails({
     sender: 'admin' | 'user';
 }) {
     const [messages, setMessages] = useState(ticket.messages);
-    useEffect(() => {
+    useLayoutEffect(() => {
         setMessages(ticket.messages);
     }, [ticket]);
     const formik = useFormik({
