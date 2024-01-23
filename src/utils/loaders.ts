@@ -5,15 +5,6 @@ export function tokenLoader() {
     return getAuthToken()
 }
 
-export function storeLoader() {
-    const token = getAuthToken()
-    if (!token || token === 'EXPIRED') {
-        return redirect('/login')
-    }
-
-    return token
-}
-
 export async function libraryLoader() {
     const token = getAuthToken()
     if (!token || token === 'EXPIRED') {
@@ -36,7 +27,7 @@ export async function libraryLoader() {
     return []
 }
 
-export function profileLoader() {
+export function authLoader() {
     const token = getAuthToken()
     if (!token || token === 'EXPIRED') {
         return redirect('/login')
