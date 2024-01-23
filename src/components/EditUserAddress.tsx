@@ -85,7 +85,7 @@ export default function EditUserAddress() {
                         {...formik.getFieldProps('street')}
                     />
                     {formik.touched.street && formik.errors.street && (
-                        <div>{formik.errors.street}</div>
+                        <div className='text-red-500'>{formik.errors.street}</div>
                     )}
                 </div>
                 <div className='flex flex-col'>
@@ -99,7 +99,7 @@ export default function EditUserAddress() {
                         {...formik.getFieldProps('postCode')}
                     />
                     {formik.touched.postCode && formik.errors.postCode && (
-                        <div>{formik.errors.postCode}</div>
+                        <div className='text-red-500'>{formik.errors.postCode}</div>
                     )}
                 </div>
                 <div className='flex flex-col'>
@@ -114,7 +114,7 @@ export default function EditUserAddress() {
                     />
                 </div>
                 {formik.touched.city && formik.errors.city && (
-                    <div>{formik.errors.city}</div>
+                    <div className='text-red-500'>{formik.errors.city}</div>
                 )}
                 <div className='flex flex-col'>
                     <label htmlFor="country" className={labelClasses}>
@@ -127,7 +127,7 @@ export default function EditUserAddress() {
                         {...formik.getFieldProps('country')}
                     />
                     {formik.touched.country && formik.errors.country && (
-                        <div>{formik.errors.country}</div>
+                        <div className='text-red-500'>{formik.errors.country}</div>
                     )}
                 </div>
                 <button

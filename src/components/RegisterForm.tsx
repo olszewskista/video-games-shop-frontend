@@ -66,8 +66,13 @@ export default function RegisterForm() {
                 .email('Enter correct email!')
                 .required('Email is required!'),
             password: Yup.string()
-                .min(6, 'Password is too short')
+                .min(8, 'Password is too short')
+                .matches(
+                    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+                    'Password must include an uppercase letter, a number, and a special character'
+                )
                 .required('Password is required!'),
+
             confirmPassword: Yup.string()
                 .required('Password is required!')
                 .oneOf([Yup.ref('password')], 'Passwords do not match!'),
@@ -104,7 +109,9 @@ export default function RegisterForm() {
                         {...formik.getFieldProps('email')}
                     />
                     {formik.errors.email && formik.touched.email && (
-                        <div className='text-red-500 text-sm mt-2'>{formik.errors.email}</div>
+                        <div className="text-red-500 text-sm mt-2">
+                            {formik.errors.email}
+                        </div>
                     )}
                 </div>
                 <div className="flex flex-col">
@@ -117,7 +124,9 @@ export default function RegisterForm() {
                         {...formik.getFieldProps('password')}
                     />
                     {formik.errors.password && formik.touched.password && (
-                        <div className='text-red-500 text-sm mt-2'>{formik.errors.password}</div>
+                        <div className="text-red-500 text-sm mt-2">
+                            {formik.errors.password}
+                        </div>
                     )}
                 </div>
                 <div className="flex flex-col">
@@ -131,7 +140,9 @@ export default function RegisterForm() {
                     />
                     {formik.errors.confirmPassword &&
                         formik.touched.confirmPassword && (
-                            <div className='text-red-500 text-sm mt-2'>{formik.errors.confirmPassword}</div>
+                            <div className="text-red-500 text-sm mt-2">
+                                {formik.errors.confirmPassword}
+                            </div>
                         )}
                 </div>
                 <button

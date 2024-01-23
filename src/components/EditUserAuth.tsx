@@ -32,7 +32,11 @@ export default function EditUserAuth() {
                 .email('Enter correct email!')
                 .required('Email is required'),
             password: Yup.string()
-                .min(6, 'Password is too short!')
+                .min(8, 'Password is too short!')
+                .matches(
+                    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+                    'Password must include an uppercase letter, a number, and a special character'
+                )
                 .required('Password is required'),
             confirmPassword: Yup.string()
                 .oneOf([Yup.ref('password')], 'Passwords must match')
@@ -87,7 +91,7 @@ export default function EditUserAuth() {
                         {...formik.getFieldProps('username')}
                     />
                     {formik.touched.username && formik.errors.username && (
-                        <div>{formik.errors.username}</div>
+                        <div className='text-red-500'>{formik.errors.username}</div>
                     )}
                 </div>
                 <div className='flex flex-col'>
@@ -101,7 +105,7 @@ export default function EditUserAuth() {
                         {...formik.getFieldProps('email')}
                     />
                     {formik.touched.email && formik.errors.email && (
-                        <div>{formik.errors.email}</div>
+                        <div className='text-red-500'>{formik.errors.email}</div>
                     )}
                 </div>
                 <div className='flex flex-col'>
@@ -116,7 +120,7 @@ export default function EditUserAuth() {
                     />
                 </div>
                 {formik.touched.password && formik.errors.password && (
-                    <div>{formik.errors.password}</div>
+                    <div className='text-red-500'>{formik.errors.password}</div>
                 )}
                 <div className='flex flex-col'>
                     <label htmlFor="confirmPassword" className={labelClasses}>
@@ -130,7 +134,7 @@ export default function EditUserAuth() {
                     />
                     {formik.touched.confirmPassword &&
                         formik.errors.confirmPassword && (
-                            <div>{formik.errors.confirmPassword}</div>
+                            <div className='text-red-500'>{formik.errors.confirmPassword}</div>
                         )}
                 </div>
                 <button
