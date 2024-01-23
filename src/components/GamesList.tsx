@@ -29,7 +29,6 @@ export default function GamesList({ games }: { games: Games }) {
             }
             const resData = await response.json();
             dispatch({ type: 'UPDATE_FAVORITES', payload: resData });
-            console.log(resData);
         } catch (error) {
             console.log(error);
         }

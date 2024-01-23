@@ -17,12 +17,12 @@ export default function ManageUsers() {
         key: 'username',
         value: '',
     });
-    const usernameRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
     async function handleSetUser(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
             const response = await fetch(
-                'http://localhost:3000/user/' + usernameRef.current?.value,
+                'http://localhost:3000/user/' + emailRef.current?.value,
                 {
                     method: 'get',
                     headers: {
@@ -112,7 +112,8 @@ export default function ManageUsers() {
                 </h3>
                 <input
                     type="text"
-                    ref={usernameRef}
+                    id='email'
+                    ref={emailRef}
                     className=" mr-4"
                 />
                 <button
@@ -131,7 +132,7 @@ export default function ManageUsers() {
                         Delete user
                     </button>
                     <div className="flex flex-col text-center gap-2">
-                        <label htmlFor="">Key</label>
+                        <label htmlFor="key">Key</label>
                         <select
                             name="key"
                             id="key"
@@ -148,7 +149,7 @@ export default function ManageUsers() {
                             <option value="password">Password</option>
                             <option value="isAdmin">Admin Account</option>
                         </select>
-                        <label htmlFor="">Value</label>
+                        <label htmlFor="value">Value</label>
                         {fieldData.key === 'isAdmin' && (
                             <select
                                 name="value"
@@ -167,6 +168,8 @@ export default function ManageUsers() {
                         )}
                         {fieldData.key !== 'isAdmin' && (
                             <input
+                                name='value'
+                                id='value'
                                 type={
                                     fieldData.key === 'balance'
                                         ? 'number'

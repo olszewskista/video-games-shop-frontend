@@ -35,7 +35,6 @@ export default function LoginForm() {
             setFeedback({ error: resData.error });
             return;
         }
-        console.log(resData.token);
         sessionStorage.setItem('token', resData.token);
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 1);

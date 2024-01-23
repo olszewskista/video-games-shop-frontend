@@ -17,7 +17,6 @@ export default function SupportPage() {
         'http://localhost:3000/tickets/user'
     );
     const [currentTicket, setCurrentTicket] = useState<number | null>(0);
-    // console.log(data);
     return (
         <div className="flex gap-12">
             <div className='flex flex-col gap-4'>

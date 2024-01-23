@@ -16,7 +16,6 @@ type Game = {
 export default function AddNewGameForm() {
     const [file, setFile] = useState<Game | null>(null)
     const fileRef = useRef<HTMLInputElement>(null)
-    console.log(file);
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -68,7 +67,7 @@ export default function AddNewGameForm() {
             <ToastContainer position='bottom-right' theme='light'/>
             <div className='flex flex-col text-center'>
                 <label htmlFor="title">Title</label>
-                <input type="text" {...formik.getFieldProps('title')}/>
+                <input id={'title'} type="text" {...formik.getFieldProps('title')}/>
             </div>
             <div className='flex flex-col text-center'>
                 <label htmlFor="description">Description</label>
@@ -76,23 +75,23 @@ export default function AddNewGameForm() {
             </div>
             <div className='flex flex-col text-center'>
                 <label htmlFor="price">Price</label>
-                <input type="number" {...formik.getFieldProps('price')}/>
+                <input id='price' type="number" {...formik.getFieldProps('price')}/>
             </div>
             <div className='flex flex-col text-center'>
                 <label htmlFor="image">Image URL</label>
-                <input type="text" {...formik.getFieldProps('image')}/>
+                <input id={'image'} type="text" {...formik.getFieldProps('image')}/>
             </div>
             <div className='flex flex-col text-center'>
                 <label htmlFor="category">Category</label>
-                <input type="text" {...formik.getFieldProps('category')}/>
+                <input id={'category'} type="text" {...formik.getFieldProps('category')}/>
             </div>
             <div className='flex flex-col text-center'>
                 <label htmlFor="releaseDate">Release Date</label>
-                <input type="date" {...formik.getFieldProps('releaseDate')}/>
+                <input id={'releaseDate'} type="date" {...formik.getFieldProps('releaseDate')}/>
             </div>
             <button type="submit" className='text-white bg-neutral-700 rounded py-1'>Add</button>
             <div>
-                <input type="file" name="" id="" onChange={handleImport} ref={fileRef}/>
+                <input type="file" name="import" id="import" onChange={handleImport} ref={fileRef}/>
                 <button type='button' onClick={handleClear}>Clear</button>
             </div>
         </form>

@@ -47,7 +47,7 @@ export default function CreateTicketForm({ updateTickets } : { updateTickets: Re
             <form onSubmit={formik.handleSubmit} className='flex flex-col gap-4 p-4 bg-neutral-800 h-fit flex-1'>
                 <div className='flex flex-col'>
                     <label htmlFor="title">Title</label>
-                    <input type="text" {...formik.getFieldProps('title')}/>
+                    <input type="text" id='title'{...formik.getFieldProps('title')}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="message">Message</label>
