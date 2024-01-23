@@ -14,6 +14,7 @@ import LibraryRootLayout from './pages/LibraryRoot';
 import LibraryDetailsPage from './pages/LibraryDetails';
 import Checkout from './pages/Checkout';
 import AdminTools from './pages/AdminTools';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         id: 'root',
         loader: tokenLoader,
+        errorElement: <ErrorPage />,
         children: [
             { index: true, element: <StorePage />, loader: authLoader },
             {
