@@ -68,7 +68,7 @@ export default function MainNavigation() {
                             icon={'dollar-sign'}
                             className="mr-2"
                         />
-                        {user?.balance}
+                        {(user?.balance || 0).toFixed(2)}
                     </div>
                 </div>
             )}
