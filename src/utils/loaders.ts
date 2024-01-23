@@ -18,7 +18,6 @@ export async function libraryLoader() {
             }
         })
         const resData = await response.json()
-        console.log(resData)
         return resData
     } catch (error) {
         console.log(error)
