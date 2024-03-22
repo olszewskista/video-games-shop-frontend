@@ -1,31 +1,65 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">
+  <br>
+  <img src="https://imgur.com/Dv30OA6.png" alt="Markdownify" width="200" border-radius="100px">
+  <br>
+  Video Games Shop
+  <br>
+</h1>
 
-Currently, two official plugins are available:
+<h4 align="center">A simple and minimalistic web app inspirated by popular game shops such as Steam or Epic Games. It is a project made as my university assignment.</h4>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h4 align="center">You can find backend <a href="https://github.com/olszewskista/video-games-shop-backend">here</a></h4>
 
-## Expanding the ESLint configuration
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#software-used">Software used</a> •
+  <a href="#my-other-projects">My other projects</a>
+</p>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![screenshot](https://imgur.com/CnXWGQg.png)
 
-- Configure the top-level `parserOptions` property like this:
+## Key Features
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+* Access the app only when logged in
+* Buy games and add them to your library
+* Choose payment method and apply discount codes
+* Return already bought games
+* Read and create reviews based on 1-5 star rating
+* Create a ticket to get help from support
+* Manage user and games data using admin tools
+
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) and [Docker](https://www.docker.com/products/docker-desktop/) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/olszewskista/v
+
+# Go into the repository
+$ cd video-games-shop-frontend
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
 ```
+> **Note**
+> This is only frontend. You should probably also run backend from [here](https://github.com/olszewskista/video-games-shop-backend)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# video-games-shop-frontend
+## Software used
+
+- Vite + React
+- TailwindCSS
+- React Router
+- Formik
+- Typescript
+- and a few smaller packages
+
+## My other projects
+
+- [video-games-shop-backend](https://github.com/olszewskista/video-games-shop-backend) - Backend repository of this app
+- [the-smartest-home](https://github.com/olszewskista/the-smartest-home) - A smart home management app which uses various web protocols
