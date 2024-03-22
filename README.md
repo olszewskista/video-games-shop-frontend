@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <img src="https://imgur.com/Dv30OA6.png" alt="Markdownify" width="200" border-radius="100px">
+  <img src="https://imgur.com/Dv30OA6.png" alt="vgs" width="200">
   <br>
   Video Games Shop
   <br>
@@ -36,7 +36,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/olszewskista/v
+$ git clone https://github.com/olszewskista/video-games-shop-frontend.git
 
 # Go into the repository
 $ cd video-games-shop-frontend
@@ -53,10 +53,10 @@ $ npm run dev
 ## Software used
 
 - Vite + React
+- Typescript
 - TailwindCSS
 - React Router
 - Formik
-- Typescript
 - and a few smaller packages
 
 ## My other projects
