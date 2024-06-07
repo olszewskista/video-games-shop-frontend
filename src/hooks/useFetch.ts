@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useState, useEffect } from 'react';
 
 type Method = 'get' | 'post' | 'put' | 'delete';
@@ -6,16 +7,19 @@ export default function useFetch<T>(initalValue: T | null, url: string, method: 
     const [data, setData] = useState(initalValue);
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const {keycloak} = useKeycloak()
+    // console.log(keycloak.token)
 
     useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
+            if (!keycloak.token) return
             try {
                 const response = await fetch(url, {
                     method: method,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                        'Authorization': 'Bearer ' + keycloak.token,
                     },
                 });
                 const resData = await response.json();
@@ -33,7 +37,7 @@ export default function useFetch<T>(initalValue: T | null, url: string, method: 
             setIsLoading(false);
         }
         fetchData();
-    }, [method, url]);
+    }, [method, url, keycloak]);
 
     return { data, error, isLoading, setData };
 }

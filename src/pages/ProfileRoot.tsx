@@ -6,6 +6,7 @@ const liClasses = 'mx-8 text-xl mb-6 uppercase font-bold w-fit'
 
 export default function ProfileRootLayout() {
     const {user} = useUser()
+    const isAdmin = user?.roles.find(item => item === 'admin')
     return (
         <div className="flex gap-4">
             <ul className="md:w-max w-1/4 bg-neutral-800 h-[85vh] rounded-br-3xl pt-8">
@@ -43,7 +44,7 @@ export default function ProfileRootLayout() {
                         Support
                     </NavLink>
                 </li>
-                {user?.isAdmin && <li className={liClasses}>
+                {isAdmin && <li className={liClasses}>
                     <NavLink
                         to={'/profile/admin'}
                         className={({ isActive }) =>

@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useRouteLoaderData } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 
 type Library = [
     {
@@ -13,7 +14,9 @@ type Library = [
 ];
 
 export default function LibraryRootLayout() {
-    const library = useRouteLoaderData('library') as Library | [];
+    // const library = useRouteLoaderData('library') as Library | [];
+    const results = useFetch([], 'http://localhost:3000/user/library')
+    const library = results.data as Library | []
     return (
         <div className="flex gap-8">
             <ul className="md:w-max w-1/4 h-[85vh] bg-neutral-800 pt-4 px-8 rounded-br-3xl overflow-y-auto">

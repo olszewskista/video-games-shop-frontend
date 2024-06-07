@@ -2,6 +2,7 @@ import { NavLink, useRouteLoaderData } from 'react-router-dom';
 import { useUser } from '../context/UserProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useLogout from '../hooks/useLogout';
+import { useKeycloak } from '@react-keycloak/web';
 
 const navClassFunc = ({ isActive }: { isActive: boolean }) =>
     isActive
@@ -9,11 +10,15 @@ const navClassFunc = ({ isActive }: { isActive: boolean }) =>
         : 'text-white md:text-3xl font-bold hover:text-blue-500';
 
 export default function MainNavigation() {
-    const token = useRouteLoaderData('root');
+    // const token = useRouteLoaderData('root');
+    const {keycloak} = useKeycloak()
     const { user } = useUser();
-    const handleLogout = useLogout();
+    // const handleLogout = useLogout();
+    function handleLogout() {
+        keycloak.logout()
+    }
 
-    const isTokenValid = token !== 'EXPIRED' && token !== null;
+    const isTokenValid = keycloak.token !== 'EXPIRED' && !!keycloak.token;
     return (
         <nav className="bg-neutral-800 p-4 flex justify-between md:text-">
             <ul className="flex gap-8 items-center">

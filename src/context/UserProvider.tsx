@@ -22,6 +22,7 @@ type User = {
     orderHistory?: string[];
     library?: string[];
     favorites?: string[];
+    roles: string[];
 } | null;
 
 type Actions =

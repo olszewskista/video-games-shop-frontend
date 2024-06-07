@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Review } from './GameReviews';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useKeycloak } from '@react-keycloak/web';
 
 type FormValues = { title: string; description: string; rating: number };
 
@@ -11,6 +12,7 @@ export default function ReviewForm({
 }: {
     setReviews: React.Dispatch<React.SetStateAction<Review[] | null>>;
 }) {
+    const {keycloak} = useKeycloak()
     const params = useParams();
     const formik = useFormik({
         initialValues: {
@@ -27,7 +29,7 @@ export default function ReviewForm({
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json',
-                    Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+                    Authorization: 'Bearer ' + keycloak.token,
                 },
                 body: JSON.stringify({
                     gameId: params.gameId,

@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useFormik } from 'formik';
 import { useLayoutEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
@@ -16,6 +17,7 @@ export default function TicketDetails({
     ticket: Ticket;
     sender: 'admin' | 'user';
 }) {
+    const {keycloak} = useKeycloak();
     const [messages, setMessages] = useState(ticket.messages);
     useLayoutEffect(() => {
         setMessages(ticket.messages);
@@ -32,9 +34,7 @@ export default function TicketDetails({
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${sessionStorage.getItem(
-                                'token'
-                            )}`,
+                            Authorization: `Bearer ${keycloak.token}`,
                         },
                         body: JSON.stringify({
                             message: values.message,
@@ -63,9 +63,7 @@ export default function TicketDetails({
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${sessionStorage.getItem(
-                            'token'
-                        )}`,
+                        Authorization: `Bearer ${keycloak.token}`,
                     },
                 }
             );

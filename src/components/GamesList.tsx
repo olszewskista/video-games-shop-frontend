@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useUser } from '../context/UserProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useKeycloak } from '@react-keycloak/web';
 
 type Games = {
     _id: string;
@@ -11,6 +12,7 @@ type Games = {
 }[];
 
 export default function GamesList({ games }: { games: Games }) {
+    const {keycloak} = useKeycloak()
     const { user, dispatch } = useUser();
     async function handleAddToFavorites(id: string) {
         try {
@@ -20,7 +22,7 @@ export default function GamesList({ games }: { games: Games }) {
                     method: 'post',
                     headers: {
                         Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                            'Bearer ' + keycloak.token,
                     },
                 }
             );

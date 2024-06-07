@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import FeedbackModal from '../components/FeedbackModal';
 import useFetch from '../hooks/useFetch';
 import { useUser } from '../context/UserProvider';
+import { useKeycloak } from '@react-keycloak/web';
 
 type Order = {
     _id: string;
@@ -24,6 +25,7 @@ type ModalHandles = {
 };
 
 export default function OrderHistoryPage() {
+    const {keycloak} = useKeycloak()
     const {dispatch} = useUser();
     const positiveModal = useRef<ModalHandles>();
     const negativeModal = useRef<ModalHandles>();
@@ -40,7 +42,7 @@ export default function OrderHistoryPage() {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                            'Bearer ' + keycloak.token,
                     },
                 }
             );

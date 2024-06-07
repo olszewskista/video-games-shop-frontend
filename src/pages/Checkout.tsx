@@ -4,6 +4,7 @@ import { useUser } from '../context/UserProvider';
 import useFetch from '../hooks/useFetch';
 import FeedbackModal from '../components/FeedbackModal';
 import UserDetails from '../components/UserDetails';
+import { useKeycloak } from '@react-keycloak/web';
 
 type ModalHandles = {
     open: () => void;
@@ -37,6 +38,7 @@ export default function Checkout() {
         isPositive: true,
         onClick: () => {},
     });
+    const {keycloak} = useKeycloak()
     const params = useParams();
     const navigate = useNavigate();
     const { user, dispatch } = useUser();
@@ -74,7 +76,7 @@ export default function Checkout() {
                     headers: {
                         'Content-type': 'application/json',
                         Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                            'Bearer ' + keycloak.token,
                     },
                     body: JSON.stringify({
                         payment: paymentMethod,

@@ -1,6 +1,7 @@
 import { useRouteLoaderData, useParams } from "react-router-dom"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useFetch from "../hooks/useFetch";
 
 
 type Game = 
@@ -15,7 +16,9 @@ type Game =
     }
 
 export default function LibraryDetailsPage() {
-    const library = useRouteLoaderData('library') as Game[] | [];
+    // const library = useRouteLoaderData('library') as Game[] | [];
+    const results = useFetch([], 'http://localhost:3000/user/library')
+    const library = results.data as Game[] | []
     const params = useParams()
     const game = library.find((game) => game._id === params.gameId)
     return <>

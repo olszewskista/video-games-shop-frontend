@@ -1,20 +1,28 @@
 import { redirect } from 'react-router-dom'
 import {getAuthToken} from '../utils/auth'
+import keycloak from './keycloak'
 
-export function tokenLoader() {
-    return getAuthToken()
+export async function tokenLoader() {
+    const token = await new Promise((res) => {
+        setTimeout(() => {
+            res(keycloak.token)
+        }, 500);
+    })
+    console.log(token)
+    return token
+    // return getAuthToken()
 }
 
 export async function libraryLoader() {
     const token = getAuthToken()
-    if (!token || token === 'EXPIRED') {
+    if (!keycloak.token || token === 'EXPIRED') {
         return redirect('/login')
     }
 
     try {
         const response = await fetch('http://localhost:3000/user/library', {
             headers: {
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + keycloak.token,
             }
         })
         const resData = await response.json()
@@ -28,7 +36,8 @@ export async function libraryLoader() {
 
 export function authLoader() {
     const token = getAuthToken()
-    if (!token || token === 'EXPIRED') {
+    // console.log(token)
+    if (!keycloak.token || token === 'EXPIRED') {
         return redirect('/login')
     }
 
@@ -36,10 +45,12 @@ export function authLoader() {
 }
 
 export async function adminLoader() {
-    const token = getAuthToken()
-    if (!token || token === 'EXPIRED') {
-        return redirect('/login')
-    }
+    const token = await new Promise((res) => {
+        setTimeout(() => {
+            res(keycloak.token)
+        }, 200);
+    })
+    console.log(token)
 
     try {
         const response = await fetch('http://localhost:3000/auth/admin', {

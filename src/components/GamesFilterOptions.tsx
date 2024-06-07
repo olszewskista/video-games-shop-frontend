@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useFormik } from 'formik';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +8,7 @@ export default function GamesFilterOptions({
 }: {
     setGames: React.Dispatch<React.SetStateAction<null>>;
 }) {
+    const {keycloak} = useKeycloak()
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -21,7 +23,7 @@ export default function GamesFilterOptions({
                         headers: {
                             'Content-Type': 'application/json',
                             Authorization:
-                                'Bearer ' + sessionStorage.getItem('token'),
+                                'Bearer ' + keycloak.token,
                         },
                     }
                 );

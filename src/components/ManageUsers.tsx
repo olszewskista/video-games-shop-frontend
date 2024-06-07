@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useState, useRef } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +13,7 @@ type User = {
 };
 
 export default function ManageUsers() {
+    const { keycloak } = useKeycloak();
     const [currUser, setCurrUser] = useState<User | null>(null);
     const [fieldData, setFieldData] = useState({
         key: 'username',
@@ -26,8 +28,7 @@ export default function ManageUsers() {
                 {
                     method: 'get',
                     headers: {
-                        Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                        Authorization: 'Bearer ' + keycloak.token,
                     },
                 }
             );
@@ -50,8 +51,7 @@ export default function ManageUsers() {
                 {
                     method: 'delete',
                     headers: {
-                        Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                        Authorization: 'Bearer ' + keycloak.token,
                     },
                 }
             );
@@ -75,8 +75,7 @@ export default function ManageUsers() {
                     method: 'put',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                        Authorization: 'Bearer ' + keycloak.token,
                     },
                     body: JSON.stringify({
                         key: fieldData.key,
@@ -98,7 +97,7 @@ export default function ManageUsers() {
         const blob = new Blob([data], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = 'user-info.json'
+        link.download = 'user-info.json';
         link.href = url;
         link.click();
     }
@@ -112,7 +111,7 @@ export default function ManageUsers() {
                 </h3>
                 <input
                     type="text"
-                    id='email'
+                    id="email"
                     ref={emailRef}
                     className=" mr-4"
                 />
@@ -168,8 +167,8 @@ export default function ManageUsers() {
                         )}
                         {fieldData.key !== 'isAdmin' && (
                             <input
-                                name='value'
-                                id='value'
+                                name="value"
+                                id="value"
                                 type={
                                     fieldData.key === 'balance'
                                         ? 'number'
@@ -190,9 +189,14 @@ export default function ManageUsers() {
                         >
                             Set data
                         </button>
-                        <button onClick={exportUser} className="py-1 px-2 bg-neutral-700 rounded">Export data</button>
+                        <button
+                            onClick={exportUser}
+                            className="py-1 px-2 bg-neutral-700 rounded"
+                        >
+                            Export data
+                        </button>
                     </div>
-                    <ToastContainer position='bottom-right'/>
+                    <ToastContainer position="bottom-right" />
                 </div>
             )}
         </div>

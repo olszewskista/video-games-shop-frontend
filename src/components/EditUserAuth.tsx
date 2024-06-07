@@ -3,6 +3,7 @@ import { useUser } from '../context/UserProvider';
 import * as Yup from 'yup';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useKeycloak } from '@react-keycloak/web';
 
 type UserAuth = {
     username: string;
@@ -15,6 +16,7 @@ const labelClasses = 'mr-4';
 const inputClasses = 'mb-2';
 
 export default function EditUserAuth() {
+    const {keycloak} = useKeycloak();
     const { user, dispatch } = useUser();
     const formik = useFormik({
         initialValues: {
@@ -53,7 +55,7 @@ export default function EditUserAuth() {
                     headers: {
                         'Content-type': 'application/json',
                         Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                            'Bearer ' + keycloak.token,
                     },
                     body: JSON.stringify({
                         username: values.username,

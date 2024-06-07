@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useFormik } from 'formik';
 import { useState, useRef } from 'react';
 import {toast, ToastContainer} from 'react-toastify'
@@ -14,6 +15,7 @@ type Game = {
 }
 
 export default function AddNewGameForm() {
+    const {keycloak} = useKeycloak();
     const [file, setFile] = useState<Game | null>(null)
     const fileRef = useRef<HTMLInputElement>(null)
     const formik = useFormik({
@@ -32,7 +34,7 @@ export default function AddNewGameForm() {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization:
-                            'Bearer ' + sessionStorage.getItem('token'),
+                            'Bearer ' + keycloak.token,
                     },
                     body: file ? JSON.stringify(file) : JSON.stringify(values),
                 });

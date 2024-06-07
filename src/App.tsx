@@ -1,5 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { libraryLoader, tokenLoader, adminLoader, authLoader } from './utils/loaders';
+import {
+    // libraryLoader,
+    tokenLoader,
+    adminLoader,
+    // authLoader,
+} from './utils/loaders';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
+import { StrictMode } from 'react';
+import keycloak from './utils/keycloak';
 import RootLayout from './pages/Root';
 import StorePage from './pages/Store';
 import LoginPage from './pages/Login';
@@ -15,6 +23,7 @@ import LibraryDetailsPage from './pages/LibraryDetails';
 import Checkout from './pages/Checkout';
 import AdminTools from './pages/AdminTools';
 import ErrorPage from './pages/Error';
+// import useAuth from './hooks/useAuth';
 
 const router = createBrowserRouter([
     {
@@ -22,12 +31,14 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         id: 'root',
         loader: tokenLoader,
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
         children: [
-            { index: true, element: <StorePage />, loader: authLoader },
+            { index: true, element: <StorePage />,
+                // loader: authLoader
+            },
             {
                 path: ':gameId',
-                loader: authLoader,
+                // loader: authLoader,
                 children: [
                     { index: true, element: <GameDetailsPage /> },
                     { path: 'checkout', element: <Checkout /> },
@@ -39,7 +50,7 @@ const router = createBrowserRouter([
                 path: 'library',
                 element: <LibraryRootLayout />,
                 id: 'library',
-                loader: libraryLoader,
+                // loader: libraryLoader,
                 children: [
                     { path: ':gameId', element: <LibraryDetailsPage /> },
                 ],
@@ -47,12 +58,16 @@ const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <ProfileRootLayout />,
-                loader: authLoader,
+                // loader: authLoader,
                 children: [
                     { index: true, element: <ProfileDetailsPage /> },
                     { path: 'orders', element: <OrderHistoryPage /> },
-                    { path: 'support', element: <SupportPage />},
-                    { path: 'admin', element: <AdminTools />, loader: adminLoader },
+                    { path: 'support', element: <SupportPage /> },
+                    {
+                        path: 'admin',
+                        element: <AdminTools />,
+                        loader: adminLoader,
+                    },
                 ],
             },
         ],
@@ -60,10 +75,20 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    // const { token, isLogin } = useAuth();
+    // console.log(isLogin);
+    // sessionStorage.setItem('token', token);
     return (
-        <UserProvider>
-            <RouterProvider router={router} />
-        </UserProvider>
+        <ReactKeycloakProvider
+            authClient={keycloak}
+            initOptions={{ onLoad: 'login-required' }}
+        >
+            <StrictMode>
+                <UserProvider>
+                    <RouterProvider router={router} />
+                </UserProvider>
+            </StrictMode>
+        </ReactKeycloakProvider>
     );
 }
 

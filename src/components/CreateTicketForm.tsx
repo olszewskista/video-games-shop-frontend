@@ -1,3 +1,4 @@
+import { useKeycloak } from '@react-keycloak/web';
 import { useFormik } from 'formik';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -9,6 +10,7 @@ type Ticket = {
 }
 
 export default function CreateTicketForm({ updateTickets } : { updateTickets: React.Dispatch<React.SetStateAction<Ticket[] | null>>}) {
+    const {keycloak} = useKeycloak();
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -20,9 +22,7 @@ export default function CreateTicketForm({ updateTickets } : { updateTickets: Re
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${sessionStorage.getItem(
-                            'token'
-                        )}`,
+                        Authorization: `Bearer ${keycloak.token}`,
                     },
                     body: JSON.stringify(values),
                 });
